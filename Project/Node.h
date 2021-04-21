@@ -2,22 +2,27 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "NodeMaster.h"                 //forward declaration was not enough
 #include "SubNFA.h"
+
+class NodeMaster; //forward declaration
 
 class Node {
 	private:
-		Node(int num, char trans, NodeMaster* master);
+		Node(int num);
 		int NodeNumber;
 		int NodeGroupIndex;                                            //easier recognition of origin
-		char Transition;
-		vector<Node*> nextNodes;
+		vector<char> transition;
+		vector<Node*> nextNodes;                                        //nodes and their transitions
+    public:
+        void addNextNode(char tran, Node* next);
 };
 
-Node::Node(int num, char trans, NodeMaster* master) {
-	Transition = trans;
+Node::Node(int num){
 	NodeNumber = num;
-	master->IncrementNodes();
+}
+
+void Node::addNextNode(char tran, Node* next){
+    return;
 }
 
 NodeMaster* constructNFA(string RE, int parenthesis) {
@@ -26,7 +31,7 @@ NodeMaster* constructNFA(string RE, int parenthesis) {
     int indexBegin, length;
 
     if(parenthesis == 0){                                               //no parenthesis to take care of
-        generateSubNFA(RE);
+        generateSubNFA(RE, master);
     }
 
     for(int i=parenthesis; i>0; --i){                                  //first we consider (), I have to get inside
@@ -44,7 +49,7 @@ NodeMaster* constructNFA(string RE, int parenthesis) {
                     --nesting;
                 }
                 else if(RE[j] == ')'){
-                    generateSubNFA(RE.substr(indexBegin+1, length-1));
+                    generateSubNFA(RE.substr(indexBegin+1, length-1), master);
                     //simplify RE
                     RE = RE.substr(0, indexBegin) + "[" + to_string(i) + "]" + RE.substr(indexBegin+length+1, RE.length()-indexBegin-length-1);
                     cout << RE << endl;
@@ -63,4 +68,54 @@ NodeMaster* constructNFA(string RE, int parenthesis) {
     }
 
 	return master;
+}
+
+//!---------------------NODEMASTER---------------------
+
+class NodeMaster{
+    private:
+        int NumberOfNodes = 0;
+        int NumberOfNodeGroups = 0;
+        Node* startNode = nullptr;
+    public:
+        void IncrementNodes(int number);
+        void IncrementNodeGroups(int number);
+        int GetNumberOfNodes();
+        Node* CreateStar(string trans);
+        Node* CreateOr(string trans1, string trans2);
+        Node* CreateAnd(string trans1, string trans2);
+};
+
+void NodeMaster::IncrementNodes(int number){
+    NumberOfNodes+=number;
+}
+
+void NodeMaster::IncrementNodeGroups(int number){
+    NumberOfNodeGroups+=number;
+}
+
+int NodeMaster::GetNumberOfNodes(){
+    return NumberOfNodes;
+}
+
+Node* NodeMaster::CreateStar(string trans){
+    Node* node1 = new Node(GetNumberOfNodes());             //We assume for now that it is the very first element
+    Node* node2 = new Node(GetNumberOfNodes()+1);
+    Node* node3 = new Node(GetNumberOfNodes()+2);
+    Node* node4 = new Node(GetNumberOfNodes()+3);
+
+
+    IncrementNodes(4);
+    IncrementNodeGroups(1);
+    return node1;
+}
+
+Node* NodeMaster::CreateOr(string trans1, string trans2){
+    IncrementNodes(6);
+    return nullptr;
+}
+
+Node* NodeMaster::CreateAnd(string trans1, string trans2){
+    IncrementNodes(2);
+    return nullptr;
 }
