@@ -19,6 +19,7 @@ class NodeMaster{
         Node* CreateStar(string trans);
         Node* CreateOr(string trans1, string trans2);
         Node* CreateAnd(string trans1, string trans2);
+        void check_if_start_node_exists(Node* newnode);
 };
 
 

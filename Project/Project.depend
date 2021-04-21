@@ -14,7 +14,7 @@
 	<string>
 	<vector>
 
-1619024309 d:\studia\sem6\ecote\project\project\nodemaster.h
+1619025720 d:\studia\sem6\ecote\project\project\nodemaster.h
 	<string>
 
 1619023606 d:\studia\sem6\ecote\project\project\subnfa.h
@@ -36,7 +36,7 @@
 	"Node.h"
 	"NodeMaster.h"
 
-1619024337 source:d:\studia\sem6\ecote\project\project\node.cpp
+1619025034 source:d:\studia\sem6\ecote\project\project\node.cpp
 	<iostream>
 	<string>
 	<vector>
