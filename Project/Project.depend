@@ -1,28 +1,46 @@
 # depslib dependency file v1.0
-1619012108 source:d:\studia\sem6\ecote\project\project\main.cpp
+1619022908 source:d:\studia\sem6\ecote\project\project\main.cpp
 	"ErrorDetection.h"
 	"Node.h"
 	"NodeMaster.h"
+	"SubNFA.h"
 	<iostream>
 	<string>
 
-1619000628 d:\studia\sem6\ecote\project\project\errordetection.h
-	<iostream>
+1619023478 d:\studia\sem6\ecote\project\project\errordetection.h
 	<string>
 
-1619013873 d:\studia\sem6\ecote\project\project\node.h
-	<iostream>
+1619023449 d:\studia\sem6\ecote\project\project\node.h
 	<string>
 	<vector>
-	"NodeMaster.h"
-	"SubNFA.h"
 
-1619013927 d:\studia\sem6\ecote\project\project\nodemaster.h
+1619023489 d:\studia\sem6\ecote\project\project\nodemaster.h
+	<string>
+
+1619023606 d:\studia\sem6\ecote\project\project\subnfa.h
+	<string>
+
+1619022423 source:d:\studia\sem6\ecote\project\project\errordetection.cpp
 	<iostream>
-	"Node.h"
+	<string>
 
-1619013827 d:\studia\sem6\ecote\project\project\subnfa.h
+1619023166 source:d:\studia\sem6\ecote\project\project\subnfa.cpp
 	<iostream>
 	<string>
 	<algorithm>
+	"Node.h"
+	"NodeMaster.h"
+
+1619023171 source:d:\studia\sem6\ecote\project\project\nodemaster.cpp
+	<iostream>
+	"Node.h"
+	"NodeMaster.h"
+
+1619023161 source:d:\studia\sem6\ecote\project\project\node.cpp
+	<iostream>
+	<string>
+	<vector>
+	"SubNFA.h"
+	"Node.h"
+	"NodeMaster.h"
 

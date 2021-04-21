@@ -1,6 +1,7 @@
 #include "ErrorDetection.h"
 #include "Node.h"
-//#include "NodeMaster.h"
+#include "NodeMaster.h"
+#include "SubNFA.h"
 #include <iostream>
 #include <string>
 
@@ -14,6 +15,7 @@ using namespace std;
 
 int main()
 {
+    //!POZDROWIENIA Z WIEZIENIA
 	string RE = "((a|(a|b)*)b)";
 	int parenthesis = checkRE(RE);			//Check if RE can be used to construct NFA and return number of parenthesis.
                                             //If not, program will be terminated.
