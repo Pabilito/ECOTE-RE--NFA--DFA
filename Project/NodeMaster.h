@@ -13,6 +13,8 @@ class NodeMaster{
     public:
         void IncrementNodes(int number);
         void IncrementNodeGroups(int number);
+        Node* GetStartNode();
+        void SetStartNode(Node* newstart);
         int GetNumberOfNodes();
         Node* CreateStar(string trans);
         Node* CreateOr(string trans1, string trans2);

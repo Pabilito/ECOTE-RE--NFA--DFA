@@ -15,12 +15,12 @@ using namespace std;
 
 int main()
 {
-    //!POZDROWIENIA Z WIEZIENIA
 	string RE = "((a|(a|b)*)b)";
 	int parenthesis = checkRE(RE);			//Check if RE can be used to construct NFA and return number of parenthesis.
                                             //If not, program will be terminated.
 	NodeMaster* start = constructNFA(RE, parenthesis);
-	cout << "Your input was: " + RE;
+	cout << "Your input was: " + RE << endl;
+	cout << start->GetStartNode()->getNodeNumber() << start->GetStartNode()->getTransitionAtPosition(0);
 
 	return 0;
 }

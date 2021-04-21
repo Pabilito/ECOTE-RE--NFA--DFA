@@ -11,8 +11,18 @@ Node::Node(int num){
 	NodeNumber = num;
 }
 
-void Node::addNextNode(char tran, Node* next){
-    return;
+string Node::getTransitionAtPosition(int pos){
+    string s(1,transition[pos]);
+    return s;
+}
+
+int Node::getNodeNumber(){
+    return NodeNumber;
+}
+
+void Node::addNextNode(string tran, Node* next){
+    nextNodes.push_back(next);
+    transition += tran;             //append new transition symbol
 }
 
 NodeMaster* constructNFA(string RE, int parenthesis) {

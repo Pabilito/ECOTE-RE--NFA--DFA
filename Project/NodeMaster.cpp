@@ -16,12 +16,31 @@ int NodeMaster::GetNumberOfNodes(){
     return NumberOfNodes;
 }
 
+Node* NodeMaster::GetStartNode(){
+    return startNode;
+}
+
+void NodeMaster::SetStartNode(Node* newstart){
+        startNode = newstart;
+}
+
 Node* NodeMaster::CreateStar(string trans){
     Node* node1 = new Node(GetNumberOfNodes());             //We assume for now that it is the very first element
     Node* node2 = new Node(GetNumberOfNodes()+1);
     Node* node3 = new Node(GetNumberOfNodes()+2);
     Node* node4 = new Node(GetNumberOfNodes()+3);
 
+    node1->addNextNode("E", node2);
+    node1->addNextNode("E", node4);
+
+    node2->addNextNode(trans, node3);
+
+    node3->addNextNode("E", node2);
+    node3->addNextNode("E", node4);
+
+    if(GetStartNode() == nullptr){
+        SetStartNode(node1);
+    }
 
     IncrementNodes(4);
     IncrementNodeGroups(1);

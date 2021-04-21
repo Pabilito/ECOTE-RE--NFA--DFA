@@ -13,10 +13,8 @@ void generateSubNFA(string subRE, NodeMaster* master){
     Node* starBegins[stars];
 
     for (int i=0; i<stars; i++){
-        starBegins[i] = master->CreateStar("a"); //!!!CHANGE LATER
+        starBegins[i] = master->CreateStar("a"); //!!!CHANGE LATER WITH ACTUAL VALUE
     }
-
-
 }
 
 
