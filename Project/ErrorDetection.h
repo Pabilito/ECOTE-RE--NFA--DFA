@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void checkRE(string RE) {
+int checkRE(string RE) {
 	//allowed symbols are ()|*
 	if (RE == "") {                                                 //I cannot even write it in console this way, but just in case
 		cout << "Empty string!  Aborting!";
@@ -27,6 +27,10 @@ void checkRE(string RE) {
 	for (int i = 0; i < lenght; ++i) {
 		if (RE[i] == '(') {
 			countL++;
+		}                                   //big E = 69
+		else if((RE[i] < 97 || RE[i] > 122) && RE[i]!=69 && RE[i]!='|' && RE[i]!='*' && RE[i]!='(' && RE[i]!=')'){
+            cout << "Only small letters and E as eps allowed!  Aborting!";
+            exit(-5);
 		}
 		else if (RE[i] == ')') {
 			countR++;
@@ -42,4 +46,5 @@ void checkRE(string RE) {
 		cout << "Unequal number of left and right parenthesis! Aborting!";
 		exit(-2);
 	}
+	return countL;
 }
