@@ -17,6 +17,7 @@ class Node {
         void addNextNode(string tran, Node* next);
         string getTransitionAtPosition(int pos);                        //get transition symbol of particular transition
         int getNodeNumber();
+        Node* findGroupEnd();
 };
 
 NodeMaster* constructNFA(string RE, int parenthesis);

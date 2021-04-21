@@ -16,6 +16,11 @@ string Node::getTransitionAtPosition(int pos){
     return s;
 }
 
+Node* Node::findGroupEnd(){
+    //!TO BE DONE
+    return nullptr;
+}
+
 int Node::getNodeNumber(){
     return NodeNumber;
 }
