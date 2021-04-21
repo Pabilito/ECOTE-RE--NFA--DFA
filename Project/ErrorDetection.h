@@ -1,5 +1,5 @@
-#include "Headers.h"
-#include "pch.h"
+
+#pragma once
 #include <iostream>
 #include <string>
 
@@ -43,5 +43,4 @@ void checkRE(string RE) {
 		cout << "Unequal number of left and right parenthesis! Aborting!";
 		exit(-2);
 	}
-
 }
