@@ -1,4 +1,3 @@
-
 #pragma once
 #include <iostream>
 #include <string>
@@ -6,8 +5,8 @@
 using namespace std;
 
 void checkRE(string RE) {
-	//allowed symbos are ()|*
-	if (RE == "") {
+	//allowed symbols are ()|*
+	if (RE == "") {                                                 //I cannot even write it in console this way, but just in case
 		cout << "Empty string!  Aborting!";
 		exit(-1);
 	}
@@ -32,7 +31,7 @@ void checkRE(string RE) {
 		else if (RE[i] == ')') {
 			countR++;
 		}
-		else if (prev == '|' && RE[i] == '|'  || prev == '*' && RE[i] == '*') {
+		else if ((prev == '|' && RE[i] == '|' ) || (prev == '*' && RE[i] == '*')){
 			cout << "|| or ** are not accepted!  Aborting!";
 			exit(-3);
 		}

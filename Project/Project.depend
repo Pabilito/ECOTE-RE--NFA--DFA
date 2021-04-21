@@ -1,15 +1,15 @@
 # depslib dependency file v1.0
-1618998070 source:d:\studia\sem6\ecote\project\project\main.cpp
+1618996712 source:d:\studia\sem6\ecote\project\project\main.cpp
 	"ErrorDetection.h"
 	"Node.h"
 	<iostream>
 	<string>
 
-1618998117 d:\studia\sem6\ecote\project\project\errordetection.h
+1618996657 d:\studia\sem6\ecote\project\project\errordetection.h
 	<iostream>
 	<string>
 
-1618998125 d:\studia\sem6\ecote\project\project\node.h
+1618996944 d:\studia\sem6\ecote\project\project\node.h
 	<string>
 	<vector>
 

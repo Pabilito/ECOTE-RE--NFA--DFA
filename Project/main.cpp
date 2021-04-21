@@ -1,5 +1,6 @@
 #include "ErrorDetection.h"
 #include "Node.h"
+#include "NodeMaster.h"
 #include <iostream>
 #include <string>
 
@@ -17,7 +18,7 @@ int main()
 	cin >> RE;
 									//Let's assume that RE will be composed of letters so I can use numbers to index nodes
 	checkRE(RE);					//Check if RE can be used to construct NFA. If not, program will be terminated.
-	Node* start = constructNFA(RE);
+	NodeMaster* start = constructNFA(RE);
 	cout << "Your input was " + RE;
 
 	return 0;
