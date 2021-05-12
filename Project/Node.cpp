@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "PostFix.h"
 #include "SubNFA.h"
 #include "Node.h"
 #include "NodeMaster.h"
@@ -31,6 +32,8 @@ void Node::addNextNode(string tran, Node* next){
 }
 
 NodeMaster* constructNFA(string RE, int parenthesis) {
+    RE = PostFix(RE);
+
     NodeMaster* master = new NodeMaster();
     int nesting, occurance;                                            //check how nested parenthesis is
     int indexBegin, length;

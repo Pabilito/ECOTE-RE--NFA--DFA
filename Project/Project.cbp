@@ -32,13 +32,15 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="ErrorDetection.cpp" />
 		<Unit filename="ErrorDetection.h" />
+		<Unit filename="Node.cpp" />
 		<Unit filename="Node.h" />
+		<Unit filename="NodeMaster.cpp" />
+		<Unit filename="NodeMaster.h" />
+		<Unit filename="SubNFA.cpp" />
+		<Unit filename="SubNFA.h" />
 		<Unit filename="main.cpp" />
-		<Extensions>
-			<code_completion />
-			<envvars />
-			<debugger />
-		</Extensions>
+		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

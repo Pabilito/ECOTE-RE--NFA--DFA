@@ -20,6 +20,7 @@ int main()
                                             //If not, program will be terminated.
 	NodeMaster* start = constructNFA(RE, parenthesis);
 	cout << "Your input was: " + RE << endl;
+	cout << "Postfix: " + RE << endl;
 	cout << start->GetStartNode()->getNodeNumber() << start->GetStartNode()->getTransitionAtPosition(0);
 
 	return 0;
