@@ -38,6 +38,8 @@
 		<Unit filename="Node.h" />
 		<Unit filename="NodeMaster.cpp" />
 		<Unit filename="NodeMaster.h" />
+		<Unit filename="PostFix.cpp" />
+		<Unit filename="PostFix.h" />
 		<Unit filename="SubNFA.cpp" />
 		<Unit filename="SubNFA.h" />
 		<Unit filename="main.cpp" />

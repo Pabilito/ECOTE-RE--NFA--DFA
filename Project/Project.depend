@@ -36,15 +36,16 @@
 	"Node.h"
 	"NodeMaster.h"
 
-1619026399 source:d:\studia\sem6\ecote\project\project\node.cpp
+1620820716 source:d:\studia\sem6\ecote\project\project\node.cpp
 	<iostream>
 	<string>
 	<vector>
+	"PostFix.h"
 	"SubNFA.h"
 	"Node.h"
 	"NodeMaster.h"
 
-1620820667 source:d:\studia\sem6\ecote\project\project\postfix.cpp
+1620821255 source:d:\studia\sem6\ecote\project\project\postfix.cpp
 	"Postfix.h"
 	<iostream>
 	<string>
