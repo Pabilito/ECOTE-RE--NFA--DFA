@@ -3,4 +3,4 @@
 
 using namespace std;
 
-int checkRE(string RE);
+void checkRE(string RE);

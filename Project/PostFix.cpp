@@ -1,8 +1,27 @@
 #include "Postfix.h"
+#include<bits/stdc++.h>         //stack operations
 #include <iostream>
 #include <string>
 
 using namespace std;
+
+//Precedence of operators
+int prec(char c) {
+    if(c == '*'){
+        return 2;
+    }
+    else if(c == '|'){
+        return 1;
+    }
+    else if(c == '+'){
+        return 0;
+    }
+    else{
+        return -1;
+    }
+
+}
+
 
 string PostFix(string RE){
     //generate + operators
@@ -14,5 +33,53 @@ string PostFix(string RE){
 		}
     }
     cout<<"RE: "+ RE <<endl;
-    return RE;
+
+    stack<char> st;
+    string result;
+
+    for(int i = 0; i < lenght; i++) {
+        char c = RE[i];
+
+        //Look for characters
+        if((c >= 'a' && c <= 'z') || c == 'E'){
+            result += c;
+        }
+
+        //Push ( to the stack
+        else if(c == '('){
+            st.push('(');
+        }
+
+        // If the scanned character is an ‘)’,
+        // pop and to output string from the stack until ‘(‘
+        else if(c == ')') {
+            while(!st.empty() && st.top() != '(')
+            {
+                char temp = st.top();
+                st.pop();
+                result += temp;
+            }
+            st.pop();
+        }
+
+        //Look for operands
+        else {
+            while(!st.empty() && prec(RE[i]) <= prec(st.top())) {
+                char temp = st.top();
+                st.pop();
+                result += temp;
+            }
+            st.push(c);
+        }
+    }
+
+    // Pop stack
+    while(!st.empty()) {
+        char temp = st.top();
+        st.pop();
+        result += temp;
+    }
+
+    cout << "RE:" << result << endl;
+    return result;
 }

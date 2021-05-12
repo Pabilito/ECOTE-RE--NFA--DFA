@@ -16,9 +16,9 @@ using namespace std;
 int main()
 {
 	string RE = "((aaa|(ab|b)*)b)bb";
-	int parenthesis = checkRE(RE);			//Check if RE can be used to construct NFA and return number of parenthesis.
+	checkRE(RE);			//Check if RE can be used to construct NFA and return number of parenthesis.
                                             //If not, program will be terminated.
-	NodeMaster* start = constructNFA(RE, parenthesis);
+	NodeMaster* start = constructNFA(RE);
 	cout << "Your input was: " + RE << endl;
 	cout << "Postfix: " + RE << endl;
 	cout << start->GetStartNode()->getNodeNumber() << start->GetStartNode()->getTransitionAtPosition(0);

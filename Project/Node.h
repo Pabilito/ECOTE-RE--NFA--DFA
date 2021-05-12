@@ -20,4 +20,4 @@ class Node {
         Node* findGroupEnd();
 };
 
-NodeMaster* constructNFA(string RE, int parenthesis);
+NodeMaster* constructNFA(string RE);

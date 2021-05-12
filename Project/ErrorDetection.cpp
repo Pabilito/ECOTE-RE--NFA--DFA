@@ -3,7 +3,7 @@
 
 using namespace std;
 
-int checkRE(string RE) {
+void checkRE(string RE) {
 	//allowed symbols are ()|*
 	if (RE == "") {                                                 //I cannot even write it in console this way, but just in case
 		cout << "Empty string!  Aborting!";
@@ -45,5 +45,5 @@ int checkRE(string RE) {
 		cout << "Unequal number of left and right parenthesis! Aborting!";
 		exit(-2);
 	}
-	return countL;
+	return;
 }
