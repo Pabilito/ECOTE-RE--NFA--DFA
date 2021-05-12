@@ -41,7 +41,7 @@ string PostFix(string RE){
         char c = RE[i];
 
         //Look for characters
-        if((c >= 'a' && c <= 'z') || c == 'E'){
+        if((c >= 'a' && c <= 'z') || c == 'E' || c=='*'){                //star is already in postfix
             result += c;
         }
 
@@ -80,6 +80,6 @@ string PostFix(string RE){
         result += temp;
     }
 
-    cout << "RE:" << result << endl;
+    cout << "Postfix: " << result << endl;
     return result;
 }
