@@ -6,8 +6,33 @@
 
 using namespace std;
 
-void generateSubNFA(string subRE, NodeMaster* master){
-    //generate NFA here
+void part(string RE, NodeMaster* master, int start, int endd){
+    cout<<start<< " "<< endd<< "\n";
+    return;
+}
+
+
+void generateSubNFA(string RE, NodeMaster* master){
+    //generate NFA parts here
+
+    //our postfix notation may have a few parts that we will glue together
+    int lenght = RE.length();
+    int start = 0;
+    int endd = 0;
+
+    for (int i = 0; i < lenght; ++i) {
+        if((RE[i] < 97 || RE[i] > 122) && RE[i]!=69 && endd == 0){              //if not a input symbol
+            endd = -1;
+        }
+        else if(endd!=0 && ((RE[i] >= 'a' && RE[i] <= 'z') || RE[i]=='E')){     //beginning of a new substring
+            endd = i-1;
+            part(RE, master, start, endd);                                      //generates a part
+            start = i;
+            endd = 0;
+        }
+    }
+    part(RE, master, start, lenght-1);  //
+    return;
 }
 
 
