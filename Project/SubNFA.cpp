@@ -7,7 +7,19 @@
 using namespace std;
 
 void part(string RE, NodeMaster* master, int start, int endd, int operators){
-    cout<< operators<<endl;
+
+    string t, t1;                               //!Substitute later with actual strings
+    for (int i=0; i<operators; i++){
+         //get operators from left to right
+        if(RE[end-operators+1+i] == "*"){
+            Node* newNode = master->CreateStar(t);
+        }else if(RE[end-operators+1+i] == "|"){
+            Node* newNode = master->CreateOr(t, t1);
+        }else //    + operator
+            Node* newNode = master->CreateAnd(t, t1);
+        }
+    }
+
     return;
 }
 
