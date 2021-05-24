@@ -8,16 +8,16 @@ using namespace std;
 
 void part(string RE, NodeMaster* master, int start, int endd, int operators){
 
-    for (int i=0; i<operators; i++){                                                //process all operators
+    for (int i=0; i<operators; i++){                                                                    //process all operators
          //get operators from left to right
         if(RE[endd-operators+1+i] == '*'){
-            Node* newNode = master->CreateStar(RE[start+i]);                        //pass parameter a when a*
+            Node* newNode = master->CreateStar(RE[endd-operators-i]);                                  //pass parameter a when a*
         //! WE MAY HAVE OR/STAR BETWEEN PARTS
         //! TWO MORE ELSES MAY BE NEEDED HERE
-        }else if(RE[endd-operators+1+i] == '|'){
-            Node* newNode = master->CreateOr(RE[start+i], RE[start+i+1]);           //pass two parameters a and b when a|b
+        }else if(RE[endd-operators+1+i] == '|'){                        //!WORKS ONLY IF WE START SUBEXPRESSION WITH THIS OPERATION
+            Node* newNode = master->CreateOr(RE[endd-operators-i-1], RE[endd-operators-i]);           //pass two parameters a and b when a|b
         }else{ //    + operator
-            Node* newNode = master->CreateAnd(RE[start+i], RE[start+i+1]);          //pass two parameters a and b when ab
+            Node* newNode = master->CreateAnd(RE[endd-operators-i-1], RE[endd-operators-i]);          //pass two parameters a and b when ab
         }
     }
 

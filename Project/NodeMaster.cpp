@@ -66,21 +66,36 @@ Node* NodeMaster::CreateStar(char trans){
 
     subnodeStart = false;
 
+    cout<<"Processed STAR" << endl;
+
     return node1;
 }
 
 Node* NodeMaster::CreateOr(char trans1, char trans2){
-    Node* node1 = new Node(GetNumberOfNodes());
-    Node* node2 = new Node(GetNumberOfNodes()+1);
-    Node* node3 = new Node(GetNumberOfNodes()+2);
-    Node* node4 = new Node(GetNumberOfNodes()+3);
-    Node* node5 = new Node(GetNumberOfNodes()+4);
-    Node* node6 = new Node(GetNumberOfNodes()+5);
-
-    if(subnodeStart){
-        subNodeStart = node1;
-        subNodeEnd = node6;
+    if(subnodeStart){                   //SHOULD WORK ONLY IN THIS CASE
+        cout<<"This part of code works only when or is a beginning of substring.";
+        exit(-1);
     }
+
+    Node* node1;
+
+    if(!subNodeEnd){
+        node1 = new Node(GetNumberOfNodes());
+        IncrementNodes(6);
+        check_if_start_node_exists(node1);
+    }else{
+        node1 = subNodeEnd;                 //Link with previous part
+        IncrementNodes(5);
+    }
+
+    Node* node2 = new Node(GetNumberOfNodes()-5);
+    Node* node3 = new Node(GetNumberOfNodes()-4);
+    Node* node4 = new Node(GetNumberOfNodes()-3);
+    Node* node5 = new Node(GetNumberOfNodes()-2);
+    Node* node6 = new Node(GetNumberOfNodes()-1);
+
+    subNodeStart = node1;
+    subNodeEnd = node6;
 
     node1->addNextNode('E', node2);
     node1->addNextNode('E', node3);
@@ -93,11 +108,9 @@ Node* NodeMaster::CreateOr(char trans1, char trans2){
 
     node5->addNextNode('E', node6);
 
-    check_if_start_node_exists(node1);
-
-    IncrementNodes(6);
-
     subnodeStart = false;
+
+    cout<<"Processed OR"<<endl;
 
     return node1;
 }
@@ -125,11 +138,13 @@ Node* NodeMaster::CreateAnd(char trans1, char trans2){
         subNodeEnd = node2;
 
         node1->addNextNode(trans2, node2);
-
+    }
 
     subnodeStart = false;
 
     node1->addNextNode('E', node2);
+
+    cout<<"Processed AND"<<endl;
 
     return node1;
 }
