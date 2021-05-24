@@ -6,51 +6,32 @@
 
 using namespace std;
 
-void part(string RE, NodeMaster* master, int start, int endd, int operators){
-
-    for (int i=0; i<operators; i++){                                                                    //process all operators
-         //get operators from left to right
-        if(RE[endd-operators+1+i] == '*'){
-            Node* newNode = master->CreateStar(RE[endd-operators-i]);                                  //pass parameter a when a*
-        //! WE MAY HAVE OR/STAR BETWEEN PARTS
-        //! TWO MORE ELSES MAY BE NEEDED HERE
-        }else if(RE[endd-operators+1+i] == '|'){                        //!WORKS ONLY IF WE START SUBEXPRESSION WITH THIS OPERATION
-            Node* newNode = master->CreateOr(RE[endd-operators-i-1], RE[endd-operators-i]);           //pass two parameters a and b when a|b
-        }else{ //    + operator
-            Node* newNode = master->CreateAnd(RE[endd-operators-i-1], RE[endd-operators-i]);          //pass two parameters a and b when ab
-        }
-    }
-
-    master->ResetSubNode();
-    return;
-}
-
-
 void generateSubNFA(string RE, NodeMaster* master){
-    //generate NFA parts here
 
-    //our postfix notation may have a few parts that we will glue together
-    int lenght = RE.length();
-    int start = 0;
-    int endd = 0;
-    int operators = 0;
+    //I need a stack of symbols
+    char stackOfSymbols[length];
+    //if char is a number we process a grouped expression
+
+    int height = 0;
 
     for (int i = 0; i < lenght; ++i) {
-        if((RE[i] < 97 || RE[i] > 122) && RE[i]!=69 && endd == 0){              //if not a input symbol
-            endd = -1;
-            operators = 1;
-        }
-        else if(endd!=0 && ((RE[i] >= 'a' && RE[i] <= 'z') || RE[i]=='E')){     //beginning of a new substring
-            endd = i-1;
-            part(RE, master, start, endd, operators);                                      //generates a part
-            start = i;
-            endd = 0;
+        if((RE[i] < 97 || RE[i] > 122) && RE[i]!=69 && endd == 0){              //operator detected
+            if(RE[i] == '*' && height>=1){
+                master->CreateStar(stackOfSymbols[height]);
+            }else if(RE[i] == '|' && height>=2){
+                master->CreateOr(stackOfSymbols[height-1], stackOfSymbols[height]);
+            }else if(RE[i] == '+' && height>=2){
+                master->CreateAnd(stackOfSymbols[height-1], stackOfSymbols[height]);
+            }else{
+                cout<<"Too many operators/too few input symols"<<endl;
+            }
         }
         else{
-            operators++;
+            ++height;
+            stackOfSymbols[height] = RE[i];                                     //put character on the stack
         }
     }
-    part(RE, master, start, lenght-1 ,operators);  //
+
     return;
 }
 
