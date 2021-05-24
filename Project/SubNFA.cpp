@@ -12,6 +12,8 @@ void part(string RE, NodeMaster* master, int start, int endd, int operators){
          //get operators from left to right
         if(RE[endd-operators+1+i] == '*'){
             Node* newNode = master->CreateStar(RE[start+i]);                        //pass parameter a when a*
+        //! WE MAY HAVE OR/STAR BETWEEN PARTS
+        //! TWO MORE ELSES MAY BE NEEDED HERE
         }else if(RE[endd-operators+1+i] == '|'){
             Node* newNode = master->CreateOr(RE[start+i], RE[start+i+1]);           //pass two parameters a and b when a|b
         }else{ //    + operator
@@ -19,6 +21,7 @@ void part(string RE, NodeMaster* master, int start, int endd, int operators){
         }
     }
 
+    master->ResetSubNode();
     return;
 }
 

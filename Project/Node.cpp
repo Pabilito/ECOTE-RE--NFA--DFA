@@ -26,7 +26,7 @@ int Node::getNodeNumber(){
     return NodeNumber;
 }
 
-void Node::addNextNode(string tran, Node* next){
+void Node::addNextNode(char tran, Node* next){
     nextNodes.push_back(next);
     transition += tran;             //append new transition symbol
 }

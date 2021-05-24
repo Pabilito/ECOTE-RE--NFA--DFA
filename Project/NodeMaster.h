@@ -10,16 +10,21 @@ class NodeMaster{
         int NumberOfNodes = 0;
         int NumberOfNodeGroups = 0;
         Node* startNode = nullptr;
+        Node* subNodeStart = nullptr;
+        Node* subNodeEnd = nullptr;
+        bool subnodeStart = true;
     public:
+        void ResetSubNode();
         void IncrementNodes(int number);
         void IncrementNodeGroups(int number);
         Node* GetStartNode();
         void SetStartNode(Node* newstart);
         int GetNumberOfNodes();
-        Node* CreateStar(string trans);
-        Node* CreateOr(string trans1, string trans2);
-        Node* CreateAnd(string trans1, string trans2);
+        Node* CreateStar(char trans);
+        Node* CreateOr(char trans1, char trans2);
+        Node* CreateAnd(char trans1, char trans2);
         void check_if_start_node_exists(Node* newnode);
+        void ternimateSubNodeGeneration();
 };
 
 

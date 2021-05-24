@@ -28,29 +28,48 @@ void NodeMaster::check_if_start_node_exists(Node* newnode){
     SetStartNode(newnode);
 }
 
+void NodeMaster::ResetSubNode(){
+    Node* subNodeStart = nullptr;
+    //!DONT CLEAR SUBNODE END
+    bool subnodeStart = true;
+    IncrementNodeGroups(1);
+}
 
-Node* NodeMaster::CreateStar(string trans){
+Node* NodeMaster::CreateStar(char trans){
+    Node *node2, *node3;
+
     Node* node1 = new Node(GetNumberOfNodes());             //We assume for now that it is the very first element
-    Node* node2 = new Node(GetNumberOfNodes()+1);
-    Node* node3 = new Node(GetNumberOfNodes()+2);
+    if(!subNodeStart){                                       //We encapsulate the expression we already have
+        node2 = subNodeStart;
+        node3 = subNodeEnd;
+        IncrementNodes(2);
+        //we already have transition 2->3
+    }else{
+        node2 = new Node(GetNumberOfNodes()+1);
+        node3 = new Node(GetNumberOfNodes()+2);
+        node2->addNextNode(trans, node3);
+        IncrementNodes(4);
+    }
+
     Node* node4 = new Node(GetNumberOfNodes()+3);
 
-    node1->addNextNode("E", node2);
-    node1->addNextNode("E", node4);
+    node1->addNextNode('E', node2);
+    node1->addNextNode('E', node4);
 
-    node2->addNextNode(trans, node3);
+    node3->addNextNode('E', node2);
+    node3->addNextNode('E', node4);
 
-    node3->addNextNode("E", node2);
-    node3->addNextNode("E", node4);
+    subNodeStart = node1;
+    subNodeEnd = node4;
 
     check_if_start_node_exists(node1);
 
-    IncrementNodes(4);
-    IncrementNodeGroups(1);
+    subnodeStart = false;
+
     return node1;
 }
 
-Node* NodeMaster::CreateOr(string trans1, string trans2){
+Node* NodeMaster::CreateOr(char trans1, char trans2){
     Node* node1 = new Node(GetNumberOfNodes());
     Node* node2 = new Node(GetNumberOfNodes()+1);
     Node* node3 = new Node(GetNumberOfNodes()+2);
@@ -58,34 +77,59 @@ Node* NodeMaster::CreateOr(string trans1, string trans2){
     Node* node5 = new Node(GetNumberOfNodes()+4);
     Node* node6 = new Node(GetNumberOfNodes()+5);
 
-    node1->addNextNode("E", node2);
-    node1->addNextNode("E", node3);
+    if(subnodeStart){
+        subNodeStart = node1;
+        subNodeEnd = node6;
+    }
+
+    node1->addNextNode('E', node2);
+    node1->addNextNode('E', node3);
 
     node2->addNextNode(trans1, node4);
 
     node3->addNextNode(trans2, node5);
 
-    node4->addNextNode("E", node6);
+    node4->addNextNode('E', node6);
 
-    node5->addNextNode("E", node6);
+    node5->addNextNode('E', node6);
 
     check_if_start_node_exists(node1);
 
     IncrementNodes(6);
-    IncrementNodeGroups(1);
+
+    subnodeStart = false;
+
     return node1;
 }
 
-Node* NodeMaster::CreateAnd(string trans1, string trans2){
-    Node* node1 = new Node(GetNumberOfNodes());
+Node* NodeMaster::CreateAnd(char trans1, char trans2){
+
+    Node *node1, *node2, *node3;
 
 
+    if(subnodeStart && !subNodeEnd){                    //assume ab is at the beginning
+        node3 = new Node(GetNumberOfNodes()+2);         //on b
+        node2 = new Node(GetNumberOfNodes()+1);         //on a
+        node1 = new Node(GetNumberOfNodes());           //start node
+        IncrementNodes(3);
+        subNodeStart = node1;
+        subNodeEnd = node3;
+        check_if_start_node_exists(node1);
 
-    //!ASSIGN NEXT TRANSITION
+        node1->addNextNode(trans1, node2);
+        node2->addNextNode(trans2, node3);
+    }else{                                              //we already have 'a' in the diagram so we only need to add b
+        node1 = subNodeEnd;
+        node2 = new Node(GetNumberOfNodes());
+        IncrementNodes(1);
+        subNodeEnd = node2;
 
-    check_if_start_node_exists(node1);
+        node1->addNextNode(trans2, node2);
 
-    IncrementNodeGroups(1);
-    IncrementNodes(2);
+
+    subnodeStart = false;
+
+    node1->addNextNode('E', node2);
+
     return node1;
 }

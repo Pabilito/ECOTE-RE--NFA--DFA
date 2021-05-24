@@ -10,11 +10,11 @@
 1620822270 d:\studia\sem6\ecote\project\project\errordetection.h
 	<string>
 
-1620822246 d:\studia\sem6\ecote\project\project\node.h
+1621852232 d:\studia\sem6\ecote\project\project\node.h
 	<string>
 	<vector>
 
-1619025720 d:\studia\sem6\ecote\project\project\nodemaster.h
+1621852768 d:\studia\sem6\ecote\project\project\nodemaster.h
 	<string>
 
 1620831256 d:\studia\sem6\ecote\project\project\subnfa.h
@@ -24,19 +24,19 @@
 	<iostream>
 	<string>
 
-1621850587 source:d:\studia\sem6\ecote\project\project\subnfa.cpp
+1621852967 source:d:\studia\sem6\ecote\project\project\subnfa.cpp
 	<iostream>
 	<string>
 	<algorithm>
 	"Node.h"
 	"NodeMaster.h"
 
-1619025721 source:d:\studia\sem6\ecote\project\project\nodemaster.cpp
+1621852829 source:d:\studia\sem6\ecote\project\project\nodemaster.cpp
 	<iostream>
 	"Node.h"
 	"NodeMaster.h"
 
-1620822239 source:d:\studia\sem6\ecote\project\project\node.cpp
+1621852227 source:d:\studia\sem6\ecote\project\project\node.cpp
 	<iostream>
 	<string>
 	<vector>
