@@ -10,11 +10,9 @@ class NodeMaster{
         int NumberOfNodes = 0;
         int NumberOfNodeGroups = 0;
         Node* startNode = nullptr;
-        Node* subNodeStart = nullptr;
-        Node* subNodeEnd = nullptr;
-        bool subnodeStart = true;
+        vector<Node*> subNodeStart;
+        vector<Node*> subNodeEnd;
     public:
-        void ResetSubNode();
         void IncrementNodes(int number);
         void IncrementNodeGroups(int number);
         Node* GetStartNode();
