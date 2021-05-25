@@ -13,13 +13,15 @@ Node::Node(int num){
 }
 
 string Node::getTransitionAtPosition(int pos){
+    if(pos>=getNodeNumberOfTransitions()){              //there is no transition
+        return "X";
+    }
     string s(1,transition[pos]);
     return s;
 }
 
-Node* Node::findGroupEnd(){
-    //!TO BE DONE
-    return nullptr;
+int Node::getNodeNumberOfTransitions(){
+    return transition.length();
 }
 
 int Node::getNodeNumber(){
@@ -37,6 +39,7 @@ NodeMaster* constructNFA(string RE) {
     NodeMaster* master = new NodeMaster();
 
     generateSubNFA(RE, master);
+    printNFA(master);
 
 	return master;
 }

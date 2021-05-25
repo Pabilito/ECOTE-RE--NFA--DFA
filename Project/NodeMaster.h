@@ -13,6 +13,7 @@ class NodeMaster{
         Node* startNode = nullptr;
         vector<Node*> subNodeStart;
         vector<Node*> subNodeEnd;
+        Node* SearchSubNode(Node* node, int index);
     public:
         void IncrementNodes(int number);
         void IncrementNodeGroups(int number);
@@ -24,6 +25,7 @@ class NodeMaster{
         void CreateAnd(char trans1, char trans2);
         void check_if_start_node_exists(Node* newnode);
         void ternimateSubNodeGeneration();
+        Node* getNodeWithIndex(int index);
 };
 
 

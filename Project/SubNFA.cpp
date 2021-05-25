@@ -52,5 +52,13 @@ void generateSubNFA(string RE, NodeMaster* master){
     return;
 }
 
+void printNFA(NodeMaster* master){
+
+    cout<<"Printing node transitions: \n";
+    for(int i=0; i<master->GetNumberOfNodes(); i++){
+
+
+    }
+}
 
 

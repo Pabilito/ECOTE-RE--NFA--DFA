@@ -11,13 +11,13 @@ class Node {
 		int NodeNumber;
 		int NodeGroupIndex;                                             //easier recognition of origin
 		string transition = "";                                         //consecutive letters define consecutive transitions
-		vector<Node*> nextNodes;                                        //nodes and their transitions
     public:
         Node(int num);
+        vector<Node*> nextNodes;                                        //nodes and their transitions
         void addNextNode(char tran, Node* next);
         string getTransitionAtPosition(int pos);                        //get transition symbol of particular transition
         int getNodeNumber();
-        Node* findGroupEnd();
+        int getNodeNumberOfTransitions();
 };
 
 NodeMaster* constructNFA(string RE);

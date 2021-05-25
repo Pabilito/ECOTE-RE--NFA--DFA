@@ -32,6 +32,38 @@ void NodeMaster::check_if_start_node_exists(Node* newnode){
     }
 }
 
+Node* NodeMaster::getNodeWithIndex(int index){
+    Node* node = nullptr;
+    if(startNode->getNodeNumber() == index){
+        return startNode;
+    }else{  //traverse the graph
+        for(int i=0; i<startNode->getNodeNumberOfTransitions(); i++){
+            node = SearchSubNode(startNode->nextNodes[i], index);
+            if(node){           //if not nullptr
+                return node;
+            }
+        }
+    }
+
+    cout<<"Node with such index could not be found - terminating process\n";
+    exit(-2);                       //such number was not found
+}
+
+Node* NodeMaster::SearchSubNode(Node* node, int index){                     //recursively search graph
+    Node* nodeReturn = nullptr;
+    if(node->getNodeNumber() == index){
+        return node;
+    }else{
+        for(int i=0; i<node->getNodeNumberOfTransitions(); i++){
+            nodeReturn = SearchSubNode(node->nextNodes[i], index);
+            if(nodeReturn){
+                return nodeReturn;
+            }
+        }
+    }
+    return nullptr;     //this subgraph does not have this node
+}
+
 void NodeMaster::CreateStar(char trans){
     Node *node1, *node2, *node3, *node4;
 
