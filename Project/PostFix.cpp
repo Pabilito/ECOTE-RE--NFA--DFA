@@ -24,18 +24,24 @@ string PostFix(string RE){
     //generate + operators
     int lenght = RE.length();
     for (int i = 0; i < lenght-1; ++i) {
-		if ((RE[i] >= 97 && RE[i] <= 122) && ((RE[i+1] >= 97 && RE[i+1] <= 122))){
+		if ((RE[i] >= 97 && RE[i] <= 122) && ((RE[i+1] >= 97 && RE[i+1] <= 122) || RE[i+1]=='E')){
 			lenght++;
+			RE.insert(i+1, "+");
+		}//we need also + operators after stars if the are some input symbols later - AND
+		else if((RE[i] == '*') && ((RE[i+1] >= 97 && RE[i+1] <= 122) || RE[i+1]=='E')){
+            lenght++;
+			RE.insert(i+1, "+");
+		}//brackets before symbol are by default AND symbol
+		else if((RE[i] == ')') && ((RE[i+1] >= 97 && RE[i+1] <= 122) || RE[i+1]=='E')){
+            lenght++;
+			RE.insert(i+1, "+");
+		}//brackets after symbol are by default AND symbol
+		else if((RE[i+1] == '(') && ((RE[i] >= 97 && RE[i] <= 122)|| RE[i]=='E')){
+            lenght++;
 			RE.insert(i+1, "+");
 		}
     }
-    //we need also + operators after stars if the are some input symbols later
-    for (int i = 0; i < lenght-1; ++i) {
-        if ((RE[i] == '*') && ((RE[i+1] >= 97 && RE[i+1] <= 122))){
-			lenght++;
-			RE.insert(i+1, "+");
-		}
-    }
+
 
     cout<<"RE: "+ RE <<endl;
 
