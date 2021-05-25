@@ -177,7 +177,7 @@ void NodeMaster::CreateAnd(char trans1, char trans2){
         if(node3 == startNode){
             SetStartNode(node1);
         }
-        cout<<"Processed t2 AND"<<endl;
+        cout<<"Processed g2 AND"<<endl;
     }else{
                                                             //assume ab is at the beginning
         node3 = new Node(GetNumberOfNodes()+2);             //on b

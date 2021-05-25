@@ -29,6 +29,14 @@ string PostFix(string RE){
 			RE.insert(i+1, "+");
 		}
     }
+    //we need also + operators after stars if the are some input symbols later
+    for (int i = 0; i < lenght-1; ++i) {
+        if ((RE[i] == '*') && ((RE[i+1] >= 97 && RE[i+1] <= 122))){
+			lenght++;
+			RE.insert(i+1, "+");
+		}
+    }
+
     cout<<"RE: "+ RE <<endl;
 
     stack<char> st;
