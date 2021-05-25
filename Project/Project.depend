@@ -24,14 +24,14 @@
 	<iostream>
 	<string>
 
-1621863719 source:d:\studia\sem6\ecote\project\project\subnfa.cpp
+1621937741 source:d:\studia\sem6\ecote\project\project\subnfa.cpp
 	<iostream>
 	<string>
 	<algorithm>
 	"Node.h"
 	"NodeMaster.h"
 
-1621863671 source:d:\studia\sem6\ecote\project\project\nodemaster.cpp
+1621939847 source:d:\studia\sem6\ecote\project\project\nodemaster.cpp
 	<iostream>
 	"Node.h"
 	"NodeMaster.h"

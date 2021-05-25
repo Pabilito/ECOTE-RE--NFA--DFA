@@ -15,7 +15,8 @@ using namespace std;
 
 int main()
 {
-	string RE = "(a|b)*ba";
+	//string RE = "(a|b)*ba";
+	string RE = "(ab)|(cd)";
 	checkRE(RE);			//Check if RE can be used to construct NFA and return number of parenthesis.
                                             //If not, program will be terminated.
 	NodeMaster* start = constructNFA(RE);

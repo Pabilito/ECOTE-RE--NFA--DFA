@@ -33,7 +33,7 @@ void generateSubNFA(string RE, NodeMaster* master){
                 ++groups;
                 stackOfSymbols[height-1] = groups;
             }else{
-                cout<<"Too many operators/too few input symols"<<endl;
+                cout<<"Too many operators/too few input symbols"<<endl;
             }
         }
         else{
