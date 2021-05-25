@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Node.h"
 #include "NodeMaster.h"
+#include <vector>
 
 using namespace std;
 
@@ -28,15 +29,15 @@ void NodeMaster::check_if_start_node_exists(Node* newnode){
     SetStartNode(newnode);
 }
 
-Node* NodeMaster::CreateStar(char trans){
+void NodeMaster::CreateStar(char trans){
     Node *node1, *node2, *node3, *node4;
 
     if((trans < 97 || trans > 122) && trans!=69){           //a group detected
         node1 = new Node(GetNumberOfNodes());               //only 2 new nodes needed
         node4 = new Node(GetNumberOfNodes()+1);
         IncrementNodes(2);
-        node2 = subNodeStart[int(trans)];                   //get existing nodes
-        node3 = subNodeEnd[int(trans)];
+        node2 = subNodeStart[int(trans)-1];                   //get existing nodes
+        node3 = subNodeEnd[int(trans)-1];
 
         //!CHECK IF START CHANGED
 
@@ -61,10 +62,11 @@ Node* NodeMaster::CreateStar(char trans){
     subNodeStart.push_back(node1);                          //push beginning and end of group of nodes into special vector
     subNodeEnd.push_back(node4);
 
-    return node1;
+    return;
 }
 
-Node* NodeMaster::CreateOr(char trans1, char trans2){
+void NodeMaster::CreateOr(char trans1, char trans2){
+
     Node *node1, *node2, *node3, *node4, *node5, *node6;
 
     if(((trans1 < 97 || trans1 > 122) && trans1!=69) && ((trans2 < 97 || trans2 > 122) && trans2!=69)){           //a group detected
@@ -72,10 +74,10 @@ Node* NodeMaster::CreateOr(char trans1, char trans2){
         node1 = new Node(GetNumberOfNodes());                   //we need only 2 new nodes
         node6 = new Node(GetNumberOfNodes()+1);
         IncrementNodes(2);
-        node2 = subNodeStart[int(trans1)];
-        node4 = subNodeEnd[int(trans1)];
-        node3 = subNodeStart[int(trans2)];
-        node5 = subNodeEnd[int(trans2)];
+        node2 = subNodeStart[int(trans1)-1];
+        node4 = subNodeEnd[int(trans1)-1];
+        node3 = subNodeStart[int(trans2)-1];
+        node5 = subNodeEnd[int(trans2)-1];
 
         cout<<"Processed t1&t2 OR"<<endl;
     }else if((trans1 < 97 || trans1 > 122) && trans1!=69){
@@ -85,8 +87,8 @@ Node* NodeMaster::CreateOr(char trans1, char trans2){
         node5 = new Node(GetNumberOfNodes()+2);
         node6 = new Node(GetNumberOfNodes()+3);
         IncrementNodes(4);
-        node2 = subNodeStart[int(trans1)];
-        node4 = subNodeEnd[int(trans1)];
+        node2 = subNodeStart[int(trans1)-1];
+        node4 = subNodeEnd[int(trans1)-1];
 
         node3->addNextNode(trans1, node5);
 
@@ -100,8 +102,8 @@ Node* NodeMaster::CreateOr(char trans1, char trans2){
         node5 = new Node(GetNumberOfNodes()+2);
         node6 = new Node(GetNumberOfNodes()+3);
         IncrementNodes(4);
-        node2 = subNodeStart[int(trans2)];
-        node4 = subNodeEnd[int(trans2)];
+        node2 = subNodeStart[int(trans2)-1];
+        node4 = subNodeEnd[int(trans2)-1];
 
         node3->addNextNode(trans2, node5);
 
@@ -134,12 +136,10 @@ Node* NodeMaster::CreateOr(char trans1, char trans2){
     subNodeStart.push_back(node1);                          //push beginning and end of group of nodes into special vector
     subNodeEnd.push_back(node6);
 
-    cout<<"Processed simple OR"<<endl;
-
-    return node1;
+    return;
 }
 
-Node* NodeMaster::CreateAnd(char trans1, char trans2){
+void NodeMaster::CreateAnd(char trans1, char trans2){
 
     Node *node1, *node2, *node3;
 
@@ -153,14 +153,14 @@ Node* NodeMaster::CreateAnd(char trans1, char trans2){
     }else if((trans1 < 97 || trans1 > 122) && trans1!=69){
         //t1 is a group
         node3 = new Node(GetNumberOfNodes());
-        node1 = subNodeEnd[int(trans1)];
+        node1 = subNodeEnd[int(trans1)-1];
         IncrementNodes(1);
         node1->addNextNode(trans2, node3);
         cout<<"Processed t1 AND"<<endl;
     }else if((trans2 < 97 || trans2 > 122) && trans2!=69){
         //t2 is a group
         node1 = new Node(GetNumberOfNodes());
-        node3 = subNodeStart[int(trans2)];
+        node3 = subNodeStart[int(trans2)-1];
         node1->addNextNode(trans1, node3);
         IncrementNodes(1);
 
@@ -185,8 +185,5 @@ Node* NodeMaster::CreateAnd(char trans1, char trans2){
     subNodeStart.push_back(node1);                          //push beginning and end of group of nodes into special vector
     subNodeEnd.push_back(node3);
 
-
-
-
-    return node1;
+    return;
 }

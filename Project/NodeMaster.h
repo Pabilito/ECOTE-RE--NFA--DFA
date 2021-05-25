@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -18,9 +19,9 @@ class NodeMaster{
         Node* GetStartNode();
         void SetStartNode(Node* newstart);
         int GetNumberOfNodes();
-        Node* CreateStar(char trans);
-        Node* CreateOr(char trans1, char trans2);
-        Node* CreateAnd(char trans1, char trans2);
+        void CreateStar(char trans);
+        void CreateOr(char trans1, char trans2);
+        void CreateAnd(char trans1, char trans2);
         void check_if_start_node_exists(Node* newnode);
         void ternimateSubNodeGeneration();
 };
