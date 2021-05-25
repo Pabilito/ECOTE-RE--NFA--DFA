@@ -26,7 +26,10 @@ void NodeMaster::SetStartNode(Node* newstart){
 }
 
 void NodeMaster::check_if_start_node_exists(Node* newnode){
-    SetStartNode(newnode);
+    if(startNode == nullptr)
+    {
+        SetStartNode(newnode);
+    }
 }
 
 void NodeMaster::CreateStar(char trans){
@@ -39,7 +42,10 @@ void NodeMaster::CreateStar(char trans){
         node2 = subNodeStart[int(trans)-1];                   //get existing nodes
         node3 = subNodeEnd[int(trans)-1];
 
-        //!CHECK IF START CHANGED
+        //CHECK IF START CHANGED
+        if(node2 == startNode){
+            SetStartNode(node1);
+        }
 
         cout<<"Processed complex STAR" << endl;
     }else{
@@ -81,7 +87,7 @@ void NodeMaster::CreateOr(char trans1, char trans2){
 
         cout<<"Processed t1&t2 OR"<<endl;
     }else if((trans1 < 97 || trans1 > 122) && trans1!=69){
-         //t1 is a group
+         //g1 is a group
         node1 = new Node(GetNumberOfNodes());                   //we need only 4 new nodes
         node3 = new Node(GetNumberOfNodes()+1);
         node5 = new Node(GetNumberOfNodes()+2);
@@ -92,11 +98,9 @@ void NodeMaster::CreateOr(char trans1, char trans2){
 
         node3->addNextNode(trans1, node5);
 
-        //!CHECK IF START CHANGED
-
         cout<<"Processed t1 OR"<<endl;
     }else if((trans2 < 97 || trans2 > 122) && trans2!=69){
-        //t2 is a group
+        //g2 is a group
         node1 = new Node(GetNumberOfNodes());                   //we need only 4 new nodes
         node3 = new Node(GetNumberOfNodes()+1);
         node5 = new Node(GetNumberOfNodes()+2);
@@ -106,8 +110,6 @@ void NodeMaster::CreateOr(char trans1, char trans2){
         node4 = subNodeEnd[int(trans2)-1];
 
         node3->addNextNode(trans2, node5);
-
-        //!CHECK IF START CHANGED
 
         cout<<"Processed t2 OR"<<endl;
     }else{
@@ -125,6 +127,13 @@ void NodeMaster::CreateOr(char trans1, char trans2){
         check_if_start_node_exists(node1);
 
         cout<<"Processed simple OR"<<endl;
+    }
+
+    //CHECK IF START CHANGED (start node was a part of one of the groups)
+    if(node2 == startNode){
+        SetStartNode(node1);
+    }else if(node3 == startNode){
+        SetStartNode(node1);
     }
 
     node1->addNextNode('E', node2);
@@ -149,23 +158,25 @@ void NodeMaster::CreateAnd(char trans1, char trans2){
         node1 = subNodeEnd[int(trans1)];
         node3 = subNodeStart[int(trans2)];
         node1->addNextNode('E', node3);                     //we have epsilon transition from node1 to node2
-        cout<<"Processed t1&t2 AND"<<endl;
+        cout<<"Processed g1&g2 AND"<<endl;
     }else if((trans1 < 97 || trans1 > 122) && trans1!=69){
-        //t1 is a group
+        //g1 is a group
         node3 = new Node(GetNumberOfNodes());
         node1 = subNodeEnd[int(trans1)-1];
         IncrementNodes(1);
         node1->addNextNode(trans2, node3);
-        cout<<"Processed t1 AND"<<endl;
+        cout<<"Processed g1 AND"<<endl;
     }else if((trans2 < 97 || trans2 > 122) && trans2!=69){
-        //t2 is a group
+        //g2 is a group
         node1 = new Node(GetNumberOfNodes());
         node3 = subNodeStart[int(trans2)-1];
         node1->addNextNode(trans1, node3);
         IncrementNodes(1);
 
-        //!CHECK IF START CHANGED
-
+        //CHECK IF START CHANGED
+        if(node3 == startNode){
+            SetStartNode(node1);
+        }
         cout<<"Processed t2 AND"<<endl;
     }else{
                                                             //assume ab is at the beginning

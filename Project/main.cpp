@@ -20,9 +20,9 @@ int main()
 	checkRE(RE);			//Check if RE can be used to construct NFA and return number of parenthesis.
                                             //If not, program will be terminated.
 	NodeMaster* start = constructNFA(RE);
-	cout << "Your input was: " + RE << endl;
-	cout << "Postfix: " + RE << endl;
-	cout << start->GetStartNode()->getNodeNumber() << start->GetStartNode()->getTransitionAtPosition(0);
 
+	cout <<"Start node: "<< start->GetStartNode()->getNodeNumber() << " - Transition(0) at symbol: "<< start->GetStartNode()->getTransitionAtPosition(0) <<endl;
+
+	//Start node: 6 - Transition(0) at symbol: E    for   RE = (ab)|(cd)
 	return 0;
 }
