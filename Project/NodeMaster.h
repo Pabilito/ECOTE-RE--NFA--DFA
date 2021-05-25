@@ -11,13 +11,16 @@ class NodeMaster{
         int NumberOfNodes = 0;
         int NumberOfNodeGroups = 0;
         Node* startNode = nullptr;
+        Node* endNode = nullptr;
         vector<Node*> subNodeStart;
         vector<Node*> subNodeEnd;
-        Node* SearchSubNode(Node* node, int index);
+        Node* SearchSubNode(Node* node, int index, vector<int> indexList);
     public:
+        void setEndNode(Node* node);
         void IncrementNodes(int number);
         void IncrementNodeGroups(int number);
         Node* GetStartNode();
+        Node* GetEndNode();
         void SetStartNode(Node* newstart);
         int GetNumberOfNodes();
         void CreateStar(char trans);

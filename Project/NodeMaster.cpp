@@ -2,6 +2,7 @@
 #include "Node.h"
 #include "NodeMaster.h"
 #include <vector>
+#include <algorithm>    //for find
 
 using namespace std;
 
@@ -21,6 +22,10 @@ Node* NodeMaster::GetStartNode(){
     return startNode;
 }
 
+Node* NodeMaster::GetEndNode(){
+    return endNode;
+}
+
 void NodeMaster::SetStartNode(Node* newstart){
     startNode = newstart;
 }
@@ -32,13 +37,21 @@ void NodeMaster::check_if_start_node_exists(Node* newnode){
     }
 }
 
+void NodeMaster::setEndNode(Node* node){
+    endNode = node;
+}
+
 Node* NodeMaster::getNodeWithIndex(int index){
     Node* node = nullptr;
+
+    vector<int> indexList;                              //used to detect loops
+    indexList.push_back(startNode->getNodeNumber());
+
     if(startNode->getNodeNumber() == index){
         return startNode;
     }else{  //traverse the graph
         for(int i=0; i<startNode->getNodeNumberOfTransitions(); i++){
-            node = SearchSubNode(startNode->nextNodes[i], index);
+            node = SearchSubNode(startNode->nextNodes[i], index, indexList);
             if(node){           //if not nullptr
                 return node;
             }
@@ -49,13 +62,18 @@ Node* NodeMaster::getNodeWithIndex(int index){
     exit(-2);                       //such number was not found
 }
 
-Node* NodeMaster::SearchSubNode(Node* node, int index){                     //recursively search graph
+Node* NodeMaster::SearchSubNode(Node* node, int index, vector<int> indexList){                     //recursively search graph
     Node* nodeReturn = nullptr;
-    if(node->getNodeNumber() == index){
+
+    if (find(indexList.begin(), indexList.end(), node->getNodeNumber()) != indexList.end()) {
+        //WE ARE IN A LOOP
+        return nullptr;
+    }else if(node->getNodeNumber() == index){
         return node;
     }else{
         for(int i=0; i<node->getNodeNumberOfTransitions(); i++){
-            nodeReturn = SearchSubNode(node->nextNodes[i], index);
+            indexList.push_back(node->getNodeNumber());
+            nodeReturn = SearchSubNode(node->nextNodes[i], index, indexList);
             if(nodeReturn){
                 return nodeReturn;
             }
@@ -187,8 +205,8 @@ void NodeMaster::CreateAnd(char trans1, char trans2){
     if(((trans1 < 97 || trans1 > 122) && trans1!=69) && ((trans2 < 97 || trans2 > 122) && trans2!=69)){           //a group detected
         //2 groups
         //No new nodes to be created
-        node1 = subNodeEnd[int(trans1)];
-        node3 = subNodeStart[int(trans2)];
+        node1 = subNodeEnd[int(trans1)-1];
+        node3 = subNodeStart[int(trans2)-1];
         node1->addNextNode('E', node3);                     //we have epsilon transition from node1 to node2
         cout<<"Processed g1&g2 AND"<<endl;
     }else if((trans1 < 97 || trans1 > 122) && trans1!=69){
@@ -209,6 +227,8 @@ void NodeMaster::CreateAnd(char trans1, char trans2){
         if(node3 == startNode){
             SetStartNode(node1);
         }
+
+        node3=subNodeEnd[int(trans2)-1];                    //change for correct subnodeend usage
         cout<<"Processed g2 AND"<<endl;
     }else{
                                                             //assume ab is at the beginning

@@ -43,7 +43,7 @@ string PostFix(string RE){
     }
 
 
-    cout<<"RE: "+ RE <<endl;
+    cout<<"Processed RE: "+ RE <<endl;
 
     stack<char> st;
     string result;
@@ -91,6 +91,6 @@ string PostFix(string RE){
         result += temp;
     }
 
-    cout << "Postfix: " << result << endl;
+    cout << "Postfix: " << result << endl <<endl;
     return result;
 }

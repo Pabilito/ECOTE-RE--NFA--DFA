@@ -53,12 +53,29 @@ void generateSubNFA(string RE, NodeMaster* master){
 }
 
 void printNFA(NodeMaster* master){
-
-    cout<<"Printing node transitions: \n";
+    Node* curr;
+    cout<<endl<<"Printing NFA transitions: \n";
+    cout<<"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"<<endl;
     for(int i=0; i<master->GetNumberOfNodes(); i++){
 
+        curr = master->getNodeWithIndex(i);
+        //Marking start and end state
+        if(curr->getNodeNumberOfTransitions() == 0){
+            cout<<"F ";
+            master->setEndNode(curr);
+        }else if(master->GetStartNode() == curr){
+            cout<<"S ";
+        }else{
+            cout<<"  ";
+        }
 
+        cout<<"Node "<<i<<"| Transitions = "<<curr->getNodeNumberOfTransitions()<<" |  ";
+        for(int j=0; j<curr->getNodeNumberOfTransitions(); j++){
+            cout<<" To node "<<curr->nextNodes[j]->getNodeNumber()<<" on "<<curr->getTransitionAtPosition(j);
+        }
+        cout<<endl;
     }
+    cout<<"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"<<endl;
 }
 
 

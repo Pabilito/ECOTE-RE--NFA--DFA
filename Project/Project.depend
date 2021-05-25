@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1621968252 source:d:\studia\sem6\ecote\project\project\main.cpp
+1621971229 source:d:\studia\sem6\ecote\project\project\main.cpp
 	"ErrorDetection.h"
 	"Node.h"
 	"NodeMaster.h"
@@ -14,7 +14,7 @@
 	<string>
 	<vector>
 
-1621968386 d:\studia\sem6\ecote\project\project\nodemaster.h
+1621971182 d:\studia\sem6\ecote\project\project\nodemaster.h
 	<string>
 	<vector>
 
@@ -26,7 +26,7 @@
 	<iostream>
 	<string>
 
-1621967016 source:d:\studia\sem6\ecote\project\project\subnfa.cpp
+1621971420 source:d:\studia\sem6\ecote\project\project\subnfa.cpp
 	<iostream>
 	<string>
 	<algorithm>
@@ -34,11 +34,12 @@
 	"Node.h"
 	"NodeMaster.h"
 
-1621967398 source:d:\studia\sem6\ecote\project\project\nodemaster.cpp
+1621971203 source:d:\studia\sem6\ecote\project\project\nodemaster.cpp
 	<iostream>
 	"Node.h"
 	"NodeMaster.h"
 	<vector>
+	<algorithm>
 
 1621967518 source:d:\studia\sem6\ecote\project\project\node.cpp
 	<iostream>
@@ -49,7 +50,7 @@
 	"Node.h"
 	"NodeMaster.h"
 
-1621943149 source:d:\studia\sem6\ecote\project\project\postfix.cpp
+1621971338 source:d:\studia\sem6\ecote\project\project\postfix.cpp
 	"Postfix.h"
 	<bits/stdc++.h>
 	<iostream>
