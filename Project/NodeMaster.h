@@ -35,6 +35,7 @@ class NodeMaster{
         void ternimateSubNodeGeneration();
         Node* getNodeWithIndex(int index);
         vector<int> getEClosure(int nodeNumber);
+        vector<int> getMove(vector<int> DFAnode, char trans);
 };
 
 

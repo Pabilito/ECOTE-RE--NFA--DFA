@@ -14,6 +14,7 @@ class Node {
     public:
         Node(int num);
         vector<Node*> nextNodes;                                        //nodes and their transitions
+        vector<int> DFANodes;
         void addNextNode(char tran, Node* next);
         string getTransitionAtPosition(int pos);                        //get transition symbol of particular transition
         int getNodeNumber();

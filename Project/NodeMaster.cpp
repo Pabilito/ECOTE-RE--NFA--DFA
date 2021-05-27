@@ -59,6 +59,18 @@ void NodeMaster::setEndNode(Node* node){
 
 vector<int> NodeMaster::getEClosure(int nodeNumber){
     Node* myNode = getNodeWithIndex(nodeNumber);
+    vector <int> vec;
+    vec.push_back(nodeNumber);  //we always add start point
+    //traverse the graph
+    for(int i=0; i<myNode->getNodeNumberOfTransitions(); i++){
+        if(myNode->transition[i] == 'E'){           //we are search for E transitions
+
+
+        }
+    }
+
+
+    return vec;
     //!TBD
 }
 

@@ -4,6 +4,8 @@
 #include "NodeMaster.h"
 #include "Node.h"
 #include <unordered_map> //to count unique input symbols
+#include <vector>
+#include <algorithm>    // sort()
 
 using namespace std;
 
@@ -35,7 +37,20 @@ void generateDFA(NodeMaster* master, string RE){
     master->IncrementDFANodes(1);
     master->setDFAstart(startNode);
 
+    vector<vector<int>> DFAnodes;
 
+    vector<int> closure = master->getEClosure(master->GetStartNode()->getNodeNumber()); //find E-closure of initial node
+
+    sort(closure.begin(), closure.end());
+    startNode->DFANodes.insert(startNode->DFANodes.end(), closure.begin(), closure.end());  //saving closure as point A
+    DFAnodes.push_back(closure);
+    cout<<DFAnodes[0][0];       //works
+
+    for(int i=0; i<master->GetNumberOfDFANodes(); i++){         //check every new DFA node
+        for(int j=0; j<inputSymbols; j++){                      //the number of times indicated by number of input symbols
+
+        }
+    }
 
     return;
 }
