@@ -62,6 +62,14 @@ vector<int> NodeMaster::RecursiveClosure(Node* node, vector<int> indexes){
         //WE HAVE ALREADY BEEN HERE OR WE ARE IN A LOOP
         return indexes;
     }
+
+    indexes.push_back(node->getNodeNumber());
+
+    for(int i=0; i<node->getNodeNumberOfTransitions(); i++){
+        if(node->getTransitionAtPosition(i) == "E"){           //we are search for E transitions
+            return RecursiveClosure(node->nextNodes[i], indexes);
+        }
+    }
 }
 
 vector<int> NodeMaster::getEClosure(int nodeNumber){
@@ -69,19 +77,30 @@ vector<int> NodeMaster::getEClosure(int nodeNumber){
     vector <int> vec;
     vec.push_back(nodeNumber);  //we always add start point
     //traverse the graph
-/*
+
     for(int i=0; i<myNode->getNodeNumberOfTransitions(); i++){
         if(myNode->getTransitionAtPosition(i) == "E"){           //we are search for E transitions
             vec = RecursiveClosure(myNode->nextNodes[i], vec);
-            }
         }
     }
-*/
     return vec;
 }
 
 vector<int> NodeMaster::getMove(vector<int> DFAnode, char trans){
-    vector <int> vec;
+    vector <int> vec = {};
+    for (int i = 0; i < DFAnode.size(); i++){
+        for(int j = 0; j < getNodeWithIndex(DFAnode[i])->getNodeNumberOfTransitions(); j++){
+            int index = getNodeWithIndex(DFAnode[i])->nextNodes[j]->getNodeNumber();
+            if(find(DFAnode.begin(), DFAnode.end(), index) != DFAnode.end())
+            {//node already in the list
+                continue;
+            }
+            else if(string(1,trans) == getNodeWithIndex(DFAnode[i])->getTransitionAtPosition(j))
+            {
+                vec.push_back(index);
+            }
+        }
+    }
     return vec;
 }
 

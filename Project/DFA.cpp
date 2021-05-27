@@ -44,7 +44,11 @@ void generateDFA(NodeMaster* master, string RE){
     sort(closure.begin(), closure.end());
     startNode->DFANodes.insert(startNode->DFANodes.end(), closure.begin(), closure.end());  //saving closure as point A
     DFAnodes.push_back(closure);
-    cout<<DFAnodes[0][0];       //works
+    cout<<"DFA 00:"<<DFAnodes[0][0]<<endl;       //works
+
+    vector<int> test;
+    test = master->getMove(DFAnodes[0], 'b');
+    cout<<"Empty: "<<test.empty()<<endl;
 
     for(int i=0; i<master->GetNumberOfDFANodes(); i++){         //check every new DFA node
         for(int j=0; j<inputSymbols; j++){                      //the number of times indicated by number of input symbols
