@@ -14,7 +14,7 @@
 	<string>
 	<vector>
 
-1622106305 d:\studia\sem6\ecote\project\project\nodemaster.h
+1622108733 d:\studia\sem6\ecote\project\project\nodemaster.h
 	<vector>
 
 1621966897 d:\studia\sem6\ecote\project\project\subnfa.h
@@ -62,7 +62,7 @@
 1622104687 d:\studia\sem6\ecote\project\project\dfa.h
 	<string>
 
-1622107543 source:d:\studia\sem6\ecote\project\project\dfa.cpp
+1622107928 source:d:\studia\sem6\ecote\project\project\dfa.cpp
 	<iostream>
 	<string>
 	"DFA.h"

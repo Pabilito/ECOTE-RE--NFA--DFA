@@ -57,25 +57,32 @@ void NodeMaster::setEndNode(Node* node){
     endNode = node;
 }
 
+vector<int> NodeMaster::RecursiveClosure(Node* node, vector<int> indexes){
+    if (find(indexes.begin(), indexes.end(), node->getNodeNumber()) != indexes.end()) {
+        //WE HAVE ALREADY BEEN HERE OR WE ARE IN A LOOP
+        return indexes;
+    }
+}
+
 vector<int> NodeMaster::getEClosure(int nodeNumber){
     Node* myNode = getNodeWithIndex(nodeNumber);
     vector <int> vec;
     vec.push_back(nodeNumber);  //we always add start point
     //traverse the graph
+/*
     for(int i=0; i<myNode->getNodeNumberOfTransitions(); i++){
-        if(myNode->transition[i] == 'E'){           //we are search for E transitions
-
-
+        if(myNode->getTransitionAtPosition(i) == "E"){           //we are search for E transitions
+            vec = RecursiveClosure(myNode->nextNodes[i], vec);
+            }
         }
     }
-
-
+*/
     return vec;
-    //!TBD
 }
 
 vector<int> NodeMaster::getMove(vector<int> DFAnode, char trans){
-    //!TBD
+    vector <int> vec;
+    return vec;
 }
 
 Node* NodeMaster::getNodeWithIndex(int index){

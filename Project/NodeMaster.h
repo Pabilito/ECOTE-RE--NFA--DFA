@@ -16,6 +16,7 @@ class NodeMaster{
         vector<Node*> subNodeStart;
         vector<Node*> subNodeEnd;
         Node* SearchSubNode(Node* node, int index, vector<int> indexList);
+        vector<int> RecursiveClosure(Node* node, vector<int> indexes);
     public:
         Node* getDFAstart();
         int GetNumberOfDFANodes();
