@@ -72,7 +72,7 @@ vector<int> NodeMaster::RecursiveClosure(Node* node, vector<int> indexes){
     }
 }
 
-vector<int> NodeMaster::getEClosure(int nodeNumber){
+vector<int> NodeMaster::getEClosure(int nodeNumber){                //closure for single node
     Node* myNode = getNodeWithIndex(nodeNumber);
     vector <int> vec;
     vec.push_back(nodeNumber);  //we always add start point
@@ -81,6 +81,22 @@ vector<int> NodeMaster::getEClosure(int nodeNumber){
     for(int i=0; i<myNode->getNodeNumberOfTransitions(); i++){
         if(myNode->getTransitionAtPosition(i) == "E"){           //we are search for E transitions
             vec = RecursiveClosure(myNode->nextNodes[i], vec);
+        }
+    }
+    return vec;
+}
+
+vector<int> NodeMaster::getEClosure(vector<int> moveNodes){       //closure for the set
+    vector <int> vec;
+    for(int k=0; k<moveNodes.size(); k++){ //extra for loop to prevent pointless going through the graph
+        vec.push_back(moveNodes[k]);  //we always add start point
+    }
+    for(int l=0; l<moveNodes.size(); l++){
+        Node* myNode = getNodeWithIndex(moveNodes[0]);
+        for(int i=0; i<myNode->getNodeNumberOfTransitions(); i++){
+            if(myNode->getTransitionAtPosition(i) == "E"){           //we are search for E transitions
+                vec = RecursiveClosure(myNode->nextNodes[i], vec);
+            }
         }
     }
     return vec;

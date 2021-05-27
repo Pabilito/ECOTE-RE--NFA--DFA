@@ -37,6 +37,7 @@ class NodeMaster{
         Node* getNodeWithIndex(int index);
         vector<int> getEClosure(int nodeNumber);
         vector<int> getMove(vector<int> DFAnode, char trans);
+        vector<int> getEClosure(vector<int> moveNodes);
 };
 
 

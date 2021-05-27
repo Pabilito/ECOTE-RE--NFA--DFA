@@ -11,9 +11,11 @@ class Node {
 		int NodeNumber;
 		int NodeGroupIndex;                                             //easier recognition of origin
 		string transition = "";                                         //consecutive letters define consecutive transitions
+        string transitionDFA = "";
     public:
         Node(int num);
         vector<Node*> nextNodes;                                        //nodes and their transitions
+        vector<Node*> nextNodesDFA;
         vector<int> DFANodes;
         void addNextNode(char tran, Node* next);
         string getTransitionAtPosition(int pos);                        //get transition symbol of particular transition

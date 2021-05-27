@@ -17,21 +17,21 @@ void generateDFA(NodeMaster* master, string RE){
         m[RE[i]]++;
     }
 
-    int inputSymbols = m.size();
-
     //we don't care about some symbols
     if (RE.find('+') != string::npos){
-        inputSymbols--;
+        m.erase('+');
     }
     if (RE.find('|') != string::npos){
-        inputSymbols--;
+        m.erase('|');
     }
     if (RE.find('*') != string::npos){
-        inputSymbols--;
+         m.erase('*');
     }
     if (RE.find('E') != string::npos){
-        inputSymbols--;
+        m.erase('E');
     }
+
+    int inputSymbols = m.size();
 
     Node* startNode = new Node(master->GetNumberOfDFANodes());
     master->IncrementDFANodes(1);
@@ -46,13 +46,21 @@ void generateDFA(NodeMaster* master, string RE){
     DFAnodes.push_back(closure);
     cout<<"DFA 00:"<<DFAnodes[0][0]<<endl;       //works
 
-    vector<int> test;
-    test = master->getMove(DFAnodes[0], 'b');
-    cout<<"Empty: "<<test.empty()<<endl;
+    vector<int> testNode;
+    vector<int> epsilonNode;
+    testNode = master->getMove(DFAnodes[0], 'b');
+    cout<<"Empty: "<<testNode.empty()<<endl;
 
     for(int i=0; i<master->GetNumberOfDFANodes(); i++){         //check every new DFA node
         for(int j=0; j<inputSymbols; j++){                      //the number of times indicated by number of input symbols
-
+            testNode = master->getMove(DFAnodes[0], m[j]);
+            if(!testNode.empty()){                              //we have some move function on this input symbol
+                epsilonNode = master->getEClosure(testNode);
+                sort(epsilonNode.begin(), epsilonNode.end());
+                for(int k=0; k<master->GetNumberOfDFANodes(); k++){
+                    //if(epsilonNode == master->GetStartNode->df)
+                }
+            }
         }
     }
 

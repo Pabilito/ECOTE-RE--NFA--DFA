@@ -34,6 +34,11 @@ void Node::addNextNode(char tran, Node* next){
     transition += tran;             //append new transition symbol
 }
 
+void Node::addNextNodeDFA(char tran, Node* next){
+    nextNodesDFA.push_back(next);
+    transition += tran;
+}
+
 NodeMaster* constructNFA(string RE) {
     RE = PostFix(RE);
 
