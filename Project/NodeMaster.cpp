@@ -18,8 +18,16 @@ int NodeMaster::GetNumberOfNodes(){
     return NumberOfNodes;
 }
 
+int NodeMaster::GetNumberOfDFANodes(){
+    return NumberOfDFANodes;
+}
+
 Node* NodeMaster::getDFAstart(){
     return startDFA;
+}
+
+void NodeMaster::IncrementDFANodes(int number){
+    NumberOfDFANodes += number;
 }
 
 void NodeMaster::setDFAstart(Node* node){
@@ -47,6 +55,15 @@ void NodeMaster::check_if_start_node_exists(Node* newnode){
 
 void NodeMaster::setEndNode(Node* node){
     endNode = node;
+}
+
+vector<int> NodeMaster::getEClosure(int nodeNumber){
+    Node* myNode = getNodeWithIndex(nodeNumber);
+    //!TBD
+}
+
+vector<int> NodeMaster::getMove(vector<int> DFAnode, char trans){
+    //!TBD
 }
 
 Node* NodeMaster::getNodeWithIndex(int index){

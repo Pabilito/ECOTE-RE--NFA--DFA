@@ -31,8 +31,11 @@ void generateDFA(NodeMaster* master, string RE){
         inputSymbols--;
     }
 
-    Node* startNode = new Node();
+    Node* startNode = new Node(master->GetNumberOfDFANodes());
+    master->IncrementDFANodes(1);
     master->setDFAstart(startNode);
+
+
 
     return;
 }

@@ -8,6 +8,7 @@ class Node;
 class NodeMaster{
     private:
         int NumberOfNodes = 0;
+        int NumberOfDFANodes = 0;
         int NumberOfNodeGroups = 0;
         Node* startNode = nullptr;
         Node* endNode = nullptr;
@@ -17,8 +18,10 @@ class NodeMaster{
         Node* SearchSubNode(Node* node, int index, vector<int> indexList);
     public:
         Node* getDFAstart();
+        int GetNumberOfDFANodes();
         void setDFAstart(Node* node);
         void setEndNode(Node* node);
+        void IncrementDFANodes(int number);
         void IncrementNodes(int number);
         void IncrementNodeGroups(int number);
         Node* GetStartNode();
@@ -31,6 +34,7 @@ class NodeMaster{
         void check_if_start_node_exists(Node* newnode);
         void ternimateSubNodeGeneration();
         Node* getNodeWithIndex(int index);
+        vector<int> getEClosure(int nodeNumber);
 };
 
 
