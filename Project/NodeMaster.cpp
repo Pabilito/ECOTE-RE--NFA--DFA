@@ -18,6 +18,14 @@ int NodeMaster::GetNumberOfNodes(){
     return NumberOfNodes;
 }
 
+Node* NodeMaster::getDFAstart(){
+    return startDFA;
+}
+
+void NodeMaster::setDFAstart(Node* node){
+    startDFA = node;
+}
+
 Node* NodeMaster::GetStartNode(){
     return startNode;
 }

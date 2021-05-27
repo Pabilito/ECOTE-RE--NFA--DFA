@@ -1,5 +1,4 @@
 #pragma once
-#include <string>
 #include <vector>
 
 using namespace std;
@@ -12,10 +11,13 @@ class NodeMaster{
         int NumberOfNodeGroups = 0;
         Node* startNode = nullptr;
         Node* endNode = nullptr;
+        Node* startDFA = nullptr;
         vector<Node*> subNodeStart;
         vector<Node*> subNodeEnd;
         Node* SearchSubNode(Node* node, int index, vector<int> indexList);
     public:
+        Node* getDFAstart();
+        void setDFAstart(Node* node);
         void setEndNode(Node* node);
         void IncrementNodes(int number);
         void IncrementNodeGroups(int number);

@@ -24,10 +24,13 @@ int main()
                                             //If not, program will be terminated.
 	NodeMaster* start = constructNFA(RE);
 
+	/*
 	cout << endl << "DFA stats:"<< endl;
 	cout << "Start node index: "<< start->GetStartNode()->getNodeNumber();
 	cout << " | Final node index: "<<start->GetEndNode()->getNodeNumber();
 	cout << " | Total nodes : "<<start->GetNumberOfNodes()<<endl;
+    */
+
 
 	//Start node: 6 - Transition(0) at symbol: E    for   RE = (ab)|(cd)
 	//Start node: 8 - Transition(0) at symbol: a    for   RE = a(a|b)*ba

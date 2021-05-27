@@ -5,6 +5,7 @@
 #include "SubNFA.h"
 #include "Node.h"
 #include "NodeMaster.h"
+#include "DFA.h"
 
 using namespace std;
 
@@ -40,6 +41,8 @@ NodeMaster* constructNFA(string RE) {
 
     generateSubNFA(RE, master);
     printNFA(master);
+    generateDFA(master, RE);
+    printDFA(master);
 
 	return master;
 }
