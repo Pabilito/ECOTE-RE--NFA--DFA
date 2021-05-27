@@ -16,6 +16,7 @@ class NodeMaster{
         vector<Node*> subNodeStart;
         vector<Node*> subNodeEnd;
         Node* SearchSubNode(Node* node, int index, vector<int> indexList);
+        Node* SearchSubNodeDFA(Node* node, int index, vector<int> indexList);
         vector<int> RecursiveClosure(Node* node, vector<int> indexes);
     public:
         Node* getDFAstart();
@@ -35,6 +36,7 @@ class NodeMaster{
         void check_if_start_node_exists(Node* newnode);
         void ternimateSubNodeGeneration();
         Node* getNodeWithIndex(int index);
+        Node* getDFANodeWithIndex(int index);
         vector<int> getEClosure(int nodeNumber);
         vector<int> getMove(vector<int> DFAnode, char trans);
         vector<int> getEClosure(vector<int> moveNodes);

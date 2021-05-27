@@ -58,18 +58,26 @@ void NodeMaster::setEndNode(Node* node){
 }
 
 vector<int> NodeMaster::RecursiveClosure(Node* node, vector<int> indexes){
+
+    for(int a=0; a<indexes.size(); a++){
+            cout<<"|";
+        cout<<indexes[a];
+    }
+
     if (find(indexes.begin(), indexes.end(), node->getNodeNumber()) != indexes.end()) {
         //WE HAVE ALREADY BEEN HERE OR WE ARE IN A LOOP
         return indexes;
     }
 
     indexes.push_back(node->getNodeNumber());
+    cout<<"    |Help!: " << node->getNodeNumber()<<endl;
 
     for(int i=0; i<node->getNodeNumberOfTransitions(); i++){
         if(node->getTransitionAtPosition(i) == "E"){           //we are search for E transitions
             return RecursiveClosure(node->nextNodes[i], indexes);
         }
     }
+    return indexes;
 }
 
 vector<int> NodeMaster::getEClosure(int nodeNumber){                //closure for single node
@@ -91,11 +99,23 @@ vector<int> NodeMaster::getEClosure(vector<int> moveNodes){       //closure for 
     for(int k=0; k<moveNodes.size(); k++){ //extra for loop to prevent pointless going through the graph
         vec.push_back(moveNodes[k]);  //we always add start point
     }
+
     for(int l=0; l<moveNodes.size(); l++){
         Node* myNode = getNodeWithIndex(moveNodes[0]);
         for(int i=0; i<myNode->getNodeNumberOfTransitions(); i++){
             if(myNode->getTransitionAtPosition(i) == "E"){           //we are search for E transitions
+                cout<<"Calling main rec: " << myNode->getNodeNumber()<<"@@@";
+                for(int a=0; a<vec.size(); a++){
+                    cout<<"|";
+                    cout<<vec[a];
+                }
+                cout<<endl;
                 vec = RecursiveClosure(myNode->nextNodes[i], vec);
+                cout<<"vec";
+                for(int a=0; a<vec.size(); a++){
+                    cout<<"|";
+                    cout<<vec[a];
+                }
             }
         }
     }
@@ -120,6 +140,29 @@ vector<int> NodeMaster::getMove(vector<int> DFAnode, char trans){
     return vec;
 }
 
+Node* NodeMaster::getDFANodeWithIndex(int index)
+{
+    Node* node = nullptr;
+
+    vector<int> indexList;                              //used to detect loops
+    indexList.push_back(startDFA->getNodeNumber());
+
+    if(startDFA->getNodeNumber() == index){
+        return startDFA;
+    }else{  //traverse the graph
+        for(int i=0; i<startDFA->getNodeNumberOfTransitions(); i++){
+            node = SearchSubNodeDFA(startDFA->nextNodesDFA[i], index, indexList);
+            if(node){           //if not nullptr
+                return node;
+            }
+        }
+    }
+
+    cout<<"Node with such index could not be found - terminating process\n";
+    exit(-2);                       //such number was not found
+
+}
+
 Node* NodeMaster::getNodeWithIndex(int index){
     Node* node = nullptr;
 
@@ -139,6 +182,26 @@ Node* NodeMaster::getNodeWithIndex(int index){
 
     cout<<"Node with such index could not be found - terminating process\n";
     exit(-2);                       //such number was not found
+}
+
+Node* NodeMaster::SearchSubNodeDFA(Node* node, int index, vector<int> indexList){                     //recursively search graph
+    Node* nodeReturn = nullptr;
+
+    if (find(indexList.begin(), indexList.end(), node->getNodeNumber()) != indexList.end()) {
+        //WE ARE IN A LOOP
+        return nullptr;
+    }else if(node->getNodeNumber() == index){
+        return node;
+    }else{
+        for(int i=0; i<node->getNodeNumberOfTransitions(); i++){
+            indexList.push_back(node->getNodeNumber());
+            nodeReturn = SearchSubNode(node->nextNodesDFA[i], index, indexList);
+            if(nodeReturn){
+                return nodeReturn;
+            }
+        }
+    }
+    return nullptr;     //this subgraph does not have this node
 }
 
 Node* NodeMaster::SearchSubNode(Node* node, int index, vector<int> indexList){                     //recursively search graph
