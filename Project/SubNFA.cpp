@@ -66,7 +66,7 @@ void printNFA(NodeMaster* master){
         }else if(master->GetStartNode() == curr){
             cout<<"S ";
         }else{
-            cout<<"  ";
+            cout<<"- ";
         }
 
         cout<<"Node "<<i<<"| Transitions = "<<curr->getNodeNumberOfTransitions()<<" |  ";

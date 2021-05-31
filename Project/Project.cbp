@@ -32,6 +32,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="CheckIfAccepted.cpp" />
+		<Unit filename="CheckIfAccepted.h" />
 		<Unit filename="DFA.cpp" />
 		<Unit filename="DFA.h" />
 		<Unit filename="ErrorDetection.cpp" />
