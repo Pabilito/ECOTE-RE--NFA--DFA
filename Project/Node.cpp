@@ -13,6 +13,10 @@ Node::Node(int num){
 	NodeNumber = num;
 }
 
+Node* Node::getTransitionAtInput(string input){
+
+}
+
 string Node::getTransitionAtPosition(int pos){
     if(pos>=getNodeNumberOfTransitions()){              //there is no transition
         return "X";

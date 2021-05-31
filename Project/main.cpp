@@ -19,21 +19,14 @@ int main()
     cout<<"+ is a symbol of AND operation, added by postfix notation generator"<<endl;
     cout<<"-------------------------------------------------------------------"<<endl<<endl;
 	string RE = "a(a|b)*ba";
+	string testString = "aaaaaa";
 	//string RE = "(ab)|(cd)";
 	cout<<"Original RE: "<<RE<<endl;
 	checkRE(RE);			//Check if RE can be used to construct NFA and return number of parenthesis.
                                             //If not, program will be terminated.
 	NodeMaster* start = constructNFA(RE);
 
-	/*
-	cout << endl << "DFA stats:"<< endl;
-	cout << "Start node index: "<< start->GetStartNode()->getNodeNumber();
-	cout << " | Final node index: "<<start->GetEndNode()->getNodeNumber();
-	cout << " | Total nodes : "<<start->GetNumberOfNodes()<<endl;
-    */
+	check(testString, start);
 
-
-	//Start node: 6 - Transition(0) at symbol: E    for   RE = (ab)|(cd)
-	//Start node: 8 - Transition(0) at symbol: a    for   RE = a(a|b)*ba
 	return 0;
 }

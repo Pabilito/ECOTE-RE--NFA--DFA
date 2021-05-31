@@ -62,7 +62,7 @@
 1622104687 d:\studia\sem6\ecote\project\project\dfa.h
 	<string>
 
-1622456398 source:d:\studia\sem6\ecote\project\project\dfa.cpp
+1622456703 source:d:\studia\sem6\ecote\project\project\dfa.cpp
 	<iostream>
 	<string>
 	"DFA.h"
@@ -71,4 +71,13 @@
 	<unordered_map>
 	<vector>
 	<algorithm>
+
+1622457150 source:d:\studia\sem6\ecote\project\project\checkifaccepted.cpp
+	<iostream>
+	<string>
+	"NodeMaster.h"
+	"CheckIfAccepted.h"
+
+1622457139 d:\studia\sem6\ecote\project\project\checkifaccepted.h
+	<string>
 
