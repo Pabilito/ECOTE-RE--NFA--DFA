@@ -147,7 +147,7 @@ vector<int> NodeMaster::getMove(vector<int> DFAnode, char trans){
     for (int i = 0; i < DFAnode.size(); i++){
         for(int j = 0; j < getNodeWithIndex(DFAnode[i])->getNodeNumberOfTransitions(); j++){
             int index = getNodeWithIndex(DFAnode[i])->nextNodes[j]->getNodeNumber();
-            cout<<getNodeWithIndex(DFAnode[i])->getTransitionAtPosition(j);
+
             if(string(1,trans) == getNodeWithIndex(DFAnode[i])->getTransitionAtPosition(j))
             {
                 vec.push_back(index);

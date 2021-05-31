@@ -88,9 +88,18 @@ void generateDFA(NodeMaster* master, string RE){
 }
 
 void printDFA(NodeMaster* master){
+    Node* curr;
     cout<<endl<<"Printing DFA"<<endl<<"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"<<endl;
-
-
+    for(int i=0; i<master->GetNumberOfDFANodes(); i++){
+        curr = master->getDFANodeWithIndex(i);
+        cout<<"Node "<< i<<"| Transitions = "<<curr->getNodeNumberOfTransitionsDFA()<<" |  ";
+        for(int j=0; j<curr->getNodeNumberOfTransitionsDFA(); j++){
+            cout<<" To nodes: ";
+            cout<< curr->nextNodesDFA[j]->getNodeNumber();
+            cout<<" on "<<curr->getTransitionAtPositionDFA(j)<<"  |  ";
+        }
+        cout<<endl;
+    }
     cout<<"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"<<endl;
 
     return;

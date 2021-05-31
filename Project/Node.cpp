@@ -21,6 +21,14 @@ string Node::getTransitionAtPosition(int pos){
     return s;
 }
 
+string Node::getTransitionAtPositionDFA(int pos){
+    if(pos>=getNodeNumberOfTransitionsDFA()){              //there is no transition
+        return "X";
+    }
+    string s(1,transitionDFA[pos]);
+    return s;
+}
+
 int Node::getNodeNumberOfTransitions(){
     return transition.length();
 }
