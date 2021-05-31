@@ -2,6 +2,7 @@
 #include "Node.h"
 #include "NodeMaster.h"
 #include "SubNFA.h"
+#include "CheckIfAccepted.h"
 #include <iostream>
 #include <string>
 

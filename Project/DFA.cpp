@@ -66,6 +66,8 @@ void generateDFA(NodeMaster* master, string RE){
                 for(int k=0; k<master->GetNumberOfDFANodes(); k++){                        //check if such DFA node already exists
                     if(epsilonNode == master->getDFANodeWithIndex(k)->DFANodes){        //we have a new DFA node
                         newNode = false;
+                        Node* tmp = master->getDFANodeWithIndex(k);
+                        master->getDFANodeWithIndex(i)->addNextNodeDFA(inputS[j], tmp);
                         cout<<"NEW TRRANSITION ADDED"<<endl;
                         //! new transition here
                     }
@@ -76,14 +78,15 @@ void generateDFA(NodeMaster* master, string RE){
                     newNode->DFANodes = epsilonNode;
                     master->IncrementDFANodes(1);
                     master->getDFANodeWithIndex(i)->addNextNodeDFA(inputS[j], newNode);
+                    if(epsilonNode.back() == master->GetNumberOfNodes()-1){
+                        newNode->endNode = true;
+                    }
                     cout<<"NODE ADDED"<<endl;
                 }
             }
         }
         cout<<"END ITERATION"<<endl;
     }
-
-    cout<<"DFA nodes: "<< master->GetNumberOfDFANodes()<<endl;
     return;
 }
 
@@ -92,11 +95,24 @@ void printDFA(NodeMaster* master){
     cout<<endl<<"Printing DFA"<<endl<<"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"<<endl;
     for(int i=0; i<master->GetNumberOfDFANodes(); i++){
         curr = master->getDFANodeWithIndex(i);
-        cout<<"Node "<< i<<"| Transitions = "<<curr->getNodeNumberOfTransitionsDFA()<<" |  ";
+
+        if(i == 0){
+            cout<<"S|";
+        }else{
+            cout<<"-|";
+        }
+
+        if(curr->endNode){
+            cout<<"F ";
+        }else{
+            cout<<"- ";
+        }
+
+        cout<<"Node "<< static_cast<char> (i+65)<<"| Transitions = "<<curr->getNodeNumberOfTransitionsDFA()<<" |  ";
         for(int j=0; j<curr->getNodeNumberOfTransitionsDFA(); j++){
-            cout<<" To nodes: ";
-            cout<< curr->nextNodesDFA[j]->getNodeNumber();
-            cout<<" on "<<curr->getTransitionAtPositionDFA(j)<<"  |  ";
+            cout<<" To ";
+            cout<< static_cast<char> (curr->nextNodesDFA[j]->getNodeNumber() +65);
+            cout<<" on "<<curr->getTransitionAtPositionDFA(j)<<" ";
         }
         cout<<endl;
     }

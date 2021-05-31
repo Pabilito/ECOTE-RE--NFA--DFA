@@ -13,6 +13,7 @@ class Node {
 		string transition = "";                                         //consecutive letters define consecutive transitions
         string transitionDFA = "";
     public:
+        bool endNode = false;
         Node(int num);
         vector<Node*> nextNodes;                                        //nodes and their transitions
         vector<Node*> nextNodesDFA;
