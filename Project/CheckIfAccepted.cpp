@@ -5,6 +5,14 @@
 #include "CheckIfAccepted.h"
 
 void check(string input, NodeMaster* master){
+    if(input == "E"){
+        if(master->getDFAstart()->endNode){
+            cout<<endl<<"String "<<input<<" is accepted! Start node is accepting node!"<<endl<<endl;
+        }else{
+            cout<<endl<<"String "<<input<<" is not accepted! DFA doesn't start in final state"<<endl<<endl;
+        }
+    }
+
     Node* curr = master->getDFAstart();
     cout<<"Transition's order: A";
     for(int i=0; i<input.length(); i++){

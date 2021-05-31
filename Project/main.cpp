@@ -18,6 +18,7 @@ int main()
 {
     cout<<"+ is a symbol of AND operation, added by postfix notation generator"<<endl;
     cout<<"-------------------------------------------------------------------"<<endl<<endl;
+
 	string RE = "a(a|b)*ba";
 	//string RE = "(ab)|(cd)";
 	//string RE = "ab*";
@@ -25,7 +26,7 @@ int main()
 	//string RE = "b*";
 	//string RE = "NOT_ALLOWED";
 
-	string testString1 = "aaaaaa";
+	string testString1 = "aba";
 	string testString2 = "aaaaabbabbabbbaaaaaaaaaaaaaaaba";
 	string testString3 = "abcde";
 	string testString4 = "baaaa";
