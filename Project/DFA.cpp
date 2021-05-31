@@ -48,6 +48,14 @@ void generateDFA(NodeMaster* master, string RE){
     sort(closure.begin(), closure.end());
     startNode->DFANodes.insert(startNode->DFANodes.end(), closure.begin(), closure.end());  //saving closure as point A
 
+    //start node can be final as well
+    for(int z = 0; z != closure.size(); z++) {
+        if(closure[z] == master->GetEndNode()->getNodeNumber()){
+                master->getDFAstart()->endNode = true;
+                break;
+        }
+    }
+
     for(int i=0; i<master->GetNumberOfDFANodes(); i++){         //check every new DFA node
         cout<<endl<<"Total nodes:"<<master->GetNumberOfDFANodes()<<endl;
         for(int j=0; j<inputSymbols; j++){                      //the number of times indicated by number of input symbols
@@ -78,8 +86,11 @@ void generateDFA(NodeMaster* master, string RE){
                     newNode->DFANodes = epsilonNode;
                     master->IncrementDFANodes(1);
                     master->getDFANodeWithIndex(i)->addNextNodeDFA(inputS[j], newNode);
-                    if(epsilonNode.back() == master->GetNumberOfNodes()-1){
-                        newNode->endNode = true;
+
+                    for(int z = 0; z != epsilonNode.size(); z++) {
+                        if(epsilonNode[z] == master->GetEndNode()->getNodeNumber()){
+                            newNode->endNode = true;
+                        }
                     }
                     cout<<"NODE ADDED"<<endl;
                 }
