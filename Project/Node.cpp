@@ -25,6 +25,10 @@ int Node::getNodeNumberOfTransitions(){
     return transition.length();
 }
 
+int Node::getNodeNumberOfTransitionsDFA(){
+    return transitionDFA.length();
+}
+
 int Node::getNodeNumber(){
     return NodeNumber;
 }
@@ -36,7 +40,7 @@ void Node::addNextNode(char tran, Node* next){
 
 void Node::addNextNodeDFA(char tran, Node* next){
     nextNodesDFA.push_back(next);
-    transition += tran;
+    transitionDFA += tran;
 }
 
 NodeMaster* constructNFA(string RE) {

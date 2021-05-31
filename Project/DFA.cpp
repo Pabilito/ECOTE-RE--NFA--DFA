@@ -43,43 +43,43 @@ void generateDFA(NodeMaster* master, string RE){
     master->IncrementDFANodes(1);
     master->setDFAstart(startNode);
 
-    vector<vector<int>> DFAnodes;
-
     vector<int> closure = master->getEClosure(master->GetStartNode()->getNodeNumber()); //find E-closure of initial node
 
     sort(closure.begin(), closure.end());
     startNode->DFANodes.insert(startNode->DFANodes.end(), closure.begin(), closure.end());  //saving closure as point A
-    DFAnodes.push_back(closure);
-    //cout<<"DFA 00:"<<DFAnodes[0][0]<<endl;       //works
-
-    vector<int> testNode;
-    vector<int> epsilonNode;
-    testNode = master->getMove(DFAnodes[0], 'b');
-    //cout<<"Empty: "<<testNode.empty()<<endl;
 
     for(int i=0; i<master->GetNumberOfDFANodes(); i++){         //check every new DFA node
+        cout<<"Total nodes:"<<master->GetNumberOfDFANodes()<<endl;
         for(int j=0; j<inputSymbols; j++){                      //the number of times indicated by number of input symbols
-            testNode = master->getMove(DFAnodes[0], inputS[j]);
+
+            vector<int> testNode;
+            vector<int> epsilonNode;
+
+            testNode = master->getMove(master->getDFANodeWithIndex(i)->DFANodes, inputS[j]);
+
             if(!testNode.empty()){                              //we have some move function on this input symbol
-                cout<<"GetEclosureCalledFrom'Main'\n";
-                epsilonNode = master->getEClosure(testNode);
+
+                epsilonNode = master->getEClosure(testNode);    //works here
                 sort(epsilonNode.begin(), epsilonNode.end());
                 bool newNode = true;
-                int k;
-                for(k=0; k<master->GetNumberOfDFANodes(); k++){                         //check if such DFA node already exists
+
+                for(int k=0; k<master->GetNumberOfDFANodes(); k++){                         //check if such DFA node already exists
                     if(epsilonNode == master->getDFANodeWithIndex(k)->DFANodes){        //we have a new DFA node
                         newNode = false;
+                        cout<<"POTENTIAL"<<endl;
                         //!potentially new transition here
                     }
                 }
                 if(newNode){    //create a new node
                     Node* newNode = new Node(master->GetNumberOfDFANodes());
+                    newNode->DFANodes = epsilonNode;
                     master->IncrementDFANodes(1);
-                    master->getNodeWithIndex(k)->addNextNodeDFA(m[j], newNode);
-                    newNode->DFANodes.insert(newNode->DFANodes.end(), epsilonNode.begin(), epsilonNode.end());
+                    master->getDFANodeWithIndex(i)->addNextNodeDFA(inputS[j], newNode);
+                    cout<<"NODE ADDED"<<endl;
                 }
             }
         }
+        cout<<"END ITERATION"<<endl;
     }
 
     cout<<"DFA nodes: "<< master->GetNumberOfDFANodes()<<endl;

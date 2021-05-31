@@ -22,6 +22,7 @@ class Node {
         string getTransitionAtPosition(int pos);                        //get transition symbol of particular transition
         int getNodeNumber();
         int getNodeNumberOfTransitions();
+        int getNodeNumberOfTransitionsDFA();
 };
 
 NodeMaster* constructNFA(string RE);

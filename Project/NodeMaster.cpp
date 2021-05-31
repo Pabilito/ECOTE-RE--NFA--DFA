@@ -66,6 +66,7 @@ vector<int> NodeMaster::RecursiveClosure(Node* node, vector<int> indexes){
 
     if (find(indexes.begin(), indexes.end(), node->getNodeNumber()) != indexes.end()) {
         //WE HAVE ALREADY BEEN HERE OR WE ARE IN A LOOP
+        cout<<"    |LOOP Recursive closure - current node: " << node->getNodeNumber()<<endl;
         return indexes;
     }
 
@@ -149,11 +150,11 @@ vector<int> NodeMaster::getMove(vector<int> DFAnode, char trans){
 
     cout<<"Move({";
     for (int i = 0; i < DFAnode.size(); i++){
-        cout<<DFAnode[i];
+        cout<<DFAnode[i]<<",";
     }
     cout<<"},"<<trans<<")={";
     for (int i = 0; i < vec.size(); i++){
-        cout<<vec[i];
+        cout<<vec[i]<<",";
     }
     cout<<"}\n";
     return vec;
@@ -169,7 +170,7 @@ Node* NodeMaster::getDFANodeWithIndex(int index)
     if(startDFA->getNodeNumber() == index){
         return startDFA;
     }else{  //traverse the graph
-        for(int i=0; i<startDFA->getNodeNumberOfTransitions(); i++){
+        for(int i=0; i<startDFA->getNodeNumberOfTransitionsDFA(); i++){
             node = SearchSubNodeDFA(startDFA->nextNodesDFA[i], index, indexList);
             if(node){           //if not nullptr
                 return node;
@@ -177,7 +178,7 @@ Node* NodeMaster::getDFANodeWithIndex(int index)
         }
     }
 
-    cout<<"Node with such index could not be found - terminating process\n";
+    cout<<"DFA Node with such index {"<< index << "} could not be found - terminating process\n";
     exit(-2);                       //such number was not found
 
 }
@@ -199,7 +200,7 @@ Node* NodeMaster::getNodeWithIndex(int index){
         }
     }
 
-    cout<<"Node with such index could not be found - terminating process\n";
+    cout<<"NFA Node with such index {"<< index << "} could not be found - terminating process\n";
     exit(-2);                       //such number was not found
 }
 
