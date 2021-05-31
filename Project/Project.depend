@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1622104307 source:d:\studia\sem6\ecote\project\project\main.cpp
+1622454386 source:d:\studia\sem6\ecote\project\project\main.cpp
 	"ErrorDetection.h"
 	"Node.h"
 	"NodeMaster.h"
@@ -33,7 +33,7 @@
 	"Node.h"
 	"NodeMaster.h"
 
-1622453295 source:d:\studia\sem6\ecote\project\project\nodemaster.cpp
+1622453904 source:d:\studia\sem6\ecote\project\project\nodemaster.cpp
 	<iostream>
 	"Node.h"
 	"NodeMaster.h"
@@ -62,7 +62,7 @@
 1622104687 d:\studia\sem6\ecote\project\project\dfa.h
 	<string>
 
-1622453234 source:d:\studia\sem6\ecote\project\project\dfa.cpp
+1622454264 source:d:\studia\sem6\ecote\project\project\dfa.cpp
 	<iostream>
 	<string>
 	"DFA.h"

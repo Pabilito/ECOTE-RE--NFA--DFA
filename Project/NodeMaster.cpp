@@ -6,6 +6,8 @@
 
 using namespace std;
 
+bool spam = false;
+
 void NodeMaster::IncrementNodes(int number){
     NumberOfNodes+=number;
 }
@@ -59,19 +61,27 @@ void NodeMaster::setEndNode(Node* node){
 
 vector<int> NodeMaster::RecursiveClosure(Node* node, vector<int> indexes){
 
-    for(int a=0; a<indexes.size(); a++){
+    if(spam){
+        for(int a=0; a<indexes.size(); a++){
             cout<<"|";
-        cout<<indexes[a];
+            cout<<indexes[a];
+        }
     }
+
 
     if (find(indexes.begin(), indexes.end(), node->getNodeNumber()) != indexes.end()) {
         //WE HAVE ALREADY BEEN HERE OR WE ARE IN A LOOP
-        cout<<"    |LOOP Recursive closure - current node: " << node->getNodeNumber()<<endl;
+        if(spam){
+            cout<<"    |LOOP Recursive closure - current node: " << node->getNodeNumber()<<endl;
+        }
         return indexes;
     }
 
     indexes.push_back(node->getNodeNumber());
-    cout<<"    |Recursive closure - current node: " << node->getNodeNumber()<<endl;
+
+    if(spam){
+        cout<<"    |Recursive closure - current node: " << node->getNodeNumber()<<endl;
+    }
 
     for(int i=0; i<node->getNodeNumberOfTransitions(); i++){
         if(node->getTransitionAtPosition(i) == "E"){           //we are search for E transitions
@@ -137,11 +147,8 @@ vector<int> NodeMaster::getMove(vector<int> DFAnode, char trans){
     for (int i = 0; i < DFAnode.size(); i++){
         for(int j = 0; j < getNodeWithIndex(DFAnode[i])->getNodeNumberOfTransitions(); j++){
             int index = getNodeWithIndex(DFAnode[i])->nextNodes[j]->getNodeNumber();
-            if(find(DFAnode.begin(), DFAnode.end(), index) != DFAnode.end())
-            {//node already in the list
-                continue;
-            }
-            else if(string(1,trans) == getNodeWithIndex(DFAnode[i])->getTransitionAtPosition(j))
+            cout<<getNodeWithIndex(DFAnode[i])->getTransitionAtPosition(j);
+            if(string(1,trans) == getNodeWithIndex(DFAnode[i])->getTransitionAtPosition(j))
             {
                 vec.push_back(index);
             }
@@ -213,9 +220,9 @@ Node* NodeMaster::SearchSubNodeDFA(Node* node, int index, vector<int> indexList)
     }else if(node->getNodeNumber() == index){
         return node;
     }else{
-        for(int i=0; i<node->getNodeNumberOfTransitions(); i++){
+        for(int i=0; i<node->getNodeNumberOfTransitionsDFA(); i++){
             indexList.push_back(node->getNodeNumber());
-            nodeReturn = SearchSubNode(node->nextNodesDFA[i], index, indexList);
+            nodeReturn = SearchSubNodeDFA(node->nextNodesDFA[i], index, indexList);
             if(nodeReturn){
                 return nodeReturn;
             }

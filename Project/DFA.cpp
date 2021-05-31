@@ -49,7 +49,7 @@ void generateDFA(NodeMaster* master, string RE){
     startNode->DFANodes.insert(startNode->DFANodes.end(), closure.begin(), closure.end());  //saving closure as point A
 
     for(int i=0; i<master->GetNumberOfDFANodes(); i++){         //check every new DFA node
-        cout<<"Total nodes:"<<master->GetNumberOfDFANodes()<<endl;
+        cout<<endl<<"Total nodes:"<<master->GetNumberOfDFANodes()<<endl;
         for(int j=0; j<inputSymbols; j++){                      //the number of times indicated by number of input symbols
 
             vector<int> testNode;
@@ -63,13 +63,14 @@ void generateDFA(NodeMaster* master, string RE){
                 sort(epsilonNode.begin(), epsilonNode.end());
                 bool newNode = true;
 
-                for(int k=0; k<master->GetNumberOfDFANodes(); k++){                         //check if such DFA node already exists
+                for(int k=0; k<master->GetNumberOfDFANodes(); k++){                        //check if such DFA node already exists
                     if(epsilonNode == master->getDFANodeWithIndex(k)->DFANodes){        //we have a new DFA node
                         newNode = false;
-                        cout<<"POTENTIAL"<<endl;
-                        //!potentially new transition here
+                        cout<<"NEW TRRANSITION ADDED"<<endl;
+                        //! new transition here
                     }
                 }
+
                 if(newNode){    //create a new node
                     Node* newNode = new Node(master->GetNumberOfDFANodes());
                     newNode->DFANodes = epsilonNode;
