@@ -48,6 +48,15 @@ void NodeMaster::SetStartNode(Node* newstart){
     startNode = newstart;
 }
 
+Node* NodeMaster::findDFAnodeATtransition(string trans, Node* curr){
+    int pos = curr->getTransitionAtInput(trans);
+    if(pos == -1){
+        return nullptr;
+    }else{
+        return curr->nextNodesDFA[pos];
+    }
+}
+
 void NodeMaster::check_if_start_node_exists(Node* newnode){
     if(startNode == nullptr)
     {

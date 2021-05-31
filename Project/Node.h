@@ -22,6 +22,7 @@ class Node {
         void addNextNodeDFA(char tran, Node* next);
         string getTransitionAtPosition(int pos);                        //get transition symbol of particular transition
         string getTransitionAtPositionDFA (int pos);
+        int getTransitionAtInput(string input);
         int getNodeNumber();
         int getNodeNumberOfTransitions();
         int getNodeNumberOfTransitionsDFA();

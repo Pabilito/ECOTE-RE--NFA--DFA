@@ -35,6 +35,7 @@ class NodeMaster{
         void CreateAnd(char trans1, char trans2);
         void check_if_start_node_exists(Node* newnode);
         void ternimateSubNodeGeneration();
+        Node* findDFAnodeATtransition(string trans, Node* curr);
         Node* getNodeWithIndex(int index);
         Node* getDFANodeWithIndex(int index);
         vector<int> getEClosure(int nodeNumber);

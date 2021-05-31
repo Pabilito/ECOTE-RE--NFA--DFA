@@ -13,8 +13,14 @@ Node::Node(int num){
 	NodeNumber = num;
 }
 
-Node* Node::getTransitionAtInput(string input){
-
+int Node::getTransitionAtInput(string input){
+    if(transitionDFA.find(input) != string::npos){
+        return transitionDFA.find(input);
+    }
+    else
+    {
+        return -1;
+    }
 }
 
 string Node::getTransitionAtPosition(int pos){
