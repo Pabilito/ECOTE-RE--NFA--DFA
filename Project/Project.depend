@@ -33,7 +33,7 @@
 	"Node.h"
 	"NodeMaster.h"
 
-1622115180 source:d:\studia\sem6\ecote\project\project\nodemaster.cpp
+1622448453 source:d:\studia\sem6\ecote\project\project\nodemaster.cpp
 	<iostream>
 	"Node.h"
 	"NodeMaster.h"
@@ -62,7 +62,7 @@
 1622104687 d:\studia\sem6\ecote\project\project\dfa.h
 	<string>
 
-1622114308 source:d:\studia\sem6\ecote\project\project\dfa.cpp
+1622448596 source:d:\studia\sem6\ecote\project\project\dfa.cpp
 	<iostream>
 	<string>
 	"DFA.h"

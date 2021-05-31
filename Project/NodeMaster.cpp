@@ -70,11 +70,11 @@ vector<int> NodeMaster::RecursiveClosure(Node* node, vector<int> indexes){
     }
 
     indexes.push_back(node->getNodeNumber());
-    cout<<"    |Help!: " << node->getNodeNumber()<<endl;
+    cout<<"    |Recursive closure - current node: " << node->getNodeNumber()<<endl;
 
     for(int i=0; i<node->getNodeNumberOfTransitions(); i++){
         if(node->getTransitionAtPosition(i) == "E"){           //we are search for E transitions
-            return RecursiveClosure(node->nextNodes[i], indexes);
+            indexes = RecursiveClosure(node->nextNodes[i], indexes);
         }
     }
     return indexes;
@@ -104,21 +104,30 @@ vector<int> NodeMaster::getEClosure(vector<int> moveNodes){       //closure for 
         Node* myNode = getNodeWithIndex(moveNodes[0]);
         for(int i=0; i<myNode->getNodeNumberOfTransitions(); i++){
             if(myNode->getTransitionAtPosition(i) == "E"){           //we are search for E transitions
-                cout<<"Calling main rec: " << myNode->getNodeNumber()<<"@@@";
+                /*
+                cout<<"Calling main rec: " << myNode->getNodeNumber()<<"->";
                 for(int a=0; a<vec.size(); a++){
                     cout<<"|";
                     cout<<vec[a];
                 }
                 cout<<endl;
+                */
                 vec = RecursiveClosure(myNode->nextNodes[i], vec);
-                cout<<"vec";
-                for(int a=0; a<vec.size(); a++){
-                    cout<<"|";
-                    cout<<vec[a];
-                }
             }
         }
     }
+
+    //PRINTING INFO
+    cout<<"E-closure{";
+    for(int a=0; a<moveNodes.size(); a++){
+        cout<<moveNodes[a]<<",";
+    }
+    cout<<"}={";
+    for(int a=0; a<vec.size(); a++){
+        cout<<vec[a]<<",";
+    }
+    cout<<"}\n";
+
     return vec;
 }
 
@@ -137,6 +146,16 @@ vector<int> NodeMaster::getMove(vector<int> DFAnode, char trans){
             }
         }
     }
+
+    cout<<"Move({";
+    for (int i = 0; i < DFAnode.size(); i++){
+        cout<<DFAnode[i];
+    }
+    cout<<"},"<<trans<<")={";
+    for (int i = 0; i < vec.size(); i++){
+        cout<<vec[i];
+    }
+    cout<<"}\n";
     return vec;
 }
 

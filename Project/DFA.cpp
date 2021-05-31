@@ -50,18 +50,18 @@ void generateDFA(NodeMaster* master, string RE){
     sort(closure.begin(), closure.end());
     startNode->DFANodes.insert(startNode->DFANodes.end(), closure.begin(), closure.end());  //saving closure as point A
     DFAnodes.push_back(closure);
-    cout<<"DFA 00:"<<DFAnodes[0][0]<<endl;       //works
+    //cout<<"DFA 00:"<<DFAnodes[0][0]<<endl;       //works
 
     vector<int> testNode;
     vector<int> epsilonNode;
     testNode = master->getMove(DFAnodes[0], 'b');
-    cout<<"Empty: "<<testNode.empty()<<endl;
+    //cout<<"Empty: "<<testNode.empty()<<endl;
 
     for(int i=0; i<master->GetNumberOfDFANodes(); i++){         //check every new DFA node
         for(int j=0; j<inputSymbols; j++){                      //the number of times indicated by number of input symbols
             testNode = master->getMove(DFAnodes[0], inputS[j]);
             if(!testNode.empty()){                              //we have some move function on this input symbol
-                cout<<"Help DFA function";
+                cout<<"GetEclosureCalledFrom'Main'\n";
                 epsilonNode = master->getEClosure(testNode);
                 sort(epsilonNode.begin(), epsilonNode.end());
                 bool newNode = true;
